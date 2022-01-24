@@ -1,0 +1,108 @@
+{
+  "board": [
+    {
+      "id": 1,
+      "title": "sdf",
+      "content": "sdfdsf",
+      "views": 13,
+      "date": 1642945220398,
+      "editDate": 1642945240580
+    },
+    {
+      "id": 3,
+      "title": "sdf",
+      "content": "sdf",
+      "views": 5,
+      "date": 1642946206968,
+      "editDate": ""
+    },
+    {
+      "id": 4,
+      "title": "sdf",
+      "content": "sdfsdfsdfsdf",
+      "views": 11,
+      "date": 1642946508400,
+      "editDate": ""
+    }
+  ],
+  "comment": [
+    {
+      "id": 4,
+      "content": "sfsd",
+      "date": 1642946446109,
+      "articleId": 3
+    },
+    {
+      "id": 5,
+      "content": "ㄴㅇ",
+      "date": 1642947179423,
+      "articleId": 2
+    },
+    {
+      "id": 6,
+      "content": "ㄴㅇ",
+      "date": 1642947181056,
+      "articleId": 2
+    },
+    {
+      "id": 7,
+      "content": "ㄴㅇ",
+      "date": 1642947182415,
+      "articleId": 2
+    },
+    {
+      "id": 8,
+      "content": "ㄴㅇ",
+      "date": 1642947184515,
+      "articleId": 2
+    },
+    {
+      "id": 9,
+      "content": "ㄴㅇ",
+      "date": 1642947185914,
+      "articleId": 2
+    },
+    {
+      "id": 10,
+      "content": "ㄴㅇ",
+      "date": 1642947187381,
+      "articleId": 2
+    },
+    {
+      "id": 11,
+      "content": "ㄴㅇ",
+      "date": 1642947189430,
+      "articleId": 2
+    },
+    {
+      "id": 12,
+      "content": "ㄴㅇ",
+      "date": 1642947191039,
+      "articleId": 2
+    },
+    {
+      "id": 13,
+      "content": "ㄴㅇ",
+      "date": 1642947218565,
+      "articleId": 2
+    },
+    {
+      "id": 14,
+      "content": "ㄴㅇ",
+      "date": 1642947220639,
+      "articleId": 2
+    },
+    {
+      "id": 15,
+      "content": "ㄴㅇ",
+      "date": 1642947222972,
+      "articleId": 2
+    },
+    {
+      "id": 16,
+      "content": "ㄴㅇㄴㅇㄴㅇㄴㅇ",
+      "date": 1642947225973,
+      "articleId": 2
+    }
+  ]
+}

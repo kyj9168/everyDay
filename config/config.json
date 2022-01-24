@@ -1,0 +1,13 @@
+{
+  "runmode": "dev",
+  "local": {
+    "DEBUG_LEVEL": "debug",
+    "ES_HOST":"elastic:rladud1158@kyj9168.ddns.net:6500",
+    "EXPRESS_PORT":6103
+  },
+  "dev": {
+    "DEBUG_LEVEL": "debug",
+    "ES_HOST":"elastic:rladud1158@kyj9168.ddns.net:6500",
+    "EXPRESS_PORT":6103
+  }
+}
