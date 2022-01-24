@@ -24,6 +24,12 @@ export function* loginUserAsync(action) {
         );
     } else {
         window.sessionStorage.setItem('status', 'logout');
+        yield put(
+            userActions.loginUserState({
+                id: '',
+                status: 'logout',
+            })
+        );
     }
 }
 
@@ -41,5 +47,11 @@ export function* loginUserCheckAsync(action) {
         );
     } else {
         window.sessionStorage.setItem('status', 'logout');
+        yield put(
+            userActions.loginUserState({
+                id: '',
+                status: 'logout',
+            })
+        );
     }
 }
