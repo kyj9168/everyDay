@@ -3,31 +3,26 @@ import { createSlice } from '@reduxjs/toolkit';
 export const userSlice = createSlice({
     name: 'user',
     initialState: {
-        status: window.sessionStorage.getItem('status') || 'none',
-        id: window.sessionStorage.getItem('id') || 'none',
-        token: window.sessionStorage.getItem('token') || 'none',
-        check: 'none',
+        id: '',
+        status: window.sessionStorage.getItem('status') || 'logout',
     },
     reducers: {
-        registerUser: (state, { payload: user }) => {
-            console.log('유저 액션 호출 -- registerUser'); // saga 애서 감시용
+        loginUserCheck: (state, { payload }) => {
+            console.log('메인 화면 유저 check -- loginUserCheck');
+            // console.log('토근 체크 추가할 부분');
         },
 
-        getUsersAsync: (state, { payload: data }) => {
-            window.sessionStorage.setItem('id', data.id || 'none');
-            window.sessionStorage.setItem('status', data.status || 'none');
+        loginUser: (state, { payload: user }) => {
+            console.log('유저 로그인 버튼 호출 -- loginUser'); // saga 애서 감시용
+        },
 
+        loginUserState: (state, { payload: data }) => {
             return {
                 ...state,
-                id: data.id || 'none',
-                status: data.status || 'none',
-                token: data.token || 'none',
-                check: data.check,
+                id: data.id || '',
+                status: data.status || 'logout',
             };
         },
-        // deleteuser: (state, { payload: id }) => {
-        //   console.log("댓글 삭제 액션 호출 -- deleteusers"); // saga 에서 감시용
-        // },
     },
 });
 

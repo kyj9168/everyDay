@@ -3,37 +3,43 @@ import Axios from 'axios';
 // import { boardActions } from '../slice/boardSlice';
 import { userActions } from '../slice/userSlice';
 import { v4 as uuidv4 } from 'uuid';
-
 import moment from 'moment';
-export function* registerUserAsync(action) {
-    const data = action.payload;
-    if (!window.sessionStorage.getItem('token')) {
-        window.sessionStorage.setItem('token', uuidv4());
-    }
-    const setParam = {
-        id: data.id,
-        pwd: data.pwd,
-        joinData: moment().format('YYYY-M-D HH:mm:ss'),
-        token: window.sessionStorage.getItem('token'),
-        check: false,
-    };
-    const responseForCheck = yield Axios.post('/userCheck', setParam);
-    console.log(123123, responseForCheck.data);
 
-    if (responseForCheck.data == true) {
-        const responseForUser = yield Axios.post('/login', setParam);
-        yield put(userActions.getUsersAsync(responseForUser.data));
-    } else if (responseForCheck.data == 'join') {
+export function* loginUserAsync(action) {
+    const data = action.payload;
+
+    const setParam = {
+        userId: data.id,
+        userPwd: data.pwd,
+    };
+    const responseForUser = yield Axios.post('/login', setParam);
+
+    if (responseForUser.data.status === 'success') {
+        window.sessionStorage.setItem('status', 'login');
         yield put(
-            userActions.getUsersAsync({
-                check: 'join',
+            userActions.loginUserState({
+                id: responseForUser.data.data.id,
+                status: 'login',
             })
         );
     } else {
+        window.sessionStorage.setItem('status', 'logout');
+    }
+}
+
+export function* loginUserCheckAsync(action) {
+    const data = action.payload;
+
+    const responseForCheck = yield Axios.post('/userCheck');
+    if (responseForCheck.data.status === 'success') {
+        window.sessionStorage.setItem('status', 'login');
         yield put(
-            userActions.getUsersAsync({
-                check: false,
+            userActions.loginUserState({
+                id: responseForCheck.data.data.id,
+                status: 'login',
             })
         );
+    } else {
+        window.sessionStorage.setItem('status', 'logout');
     }
 }

@@ -8,7 +8,23 @@ const runmode = configfile.runmode;
 const config = configfile[runmode];
 const indexRouter = require('./routes/index');
 const port = config.EXPRESS_PORT;
+var cookieParser = require('cookie-parser');
+let sessionParser = require('express-session');
+let FileStore = require('session-file-store')(sessionParser); // 1
 
+app.use(cookieParser());
+
+app.use(sessionParser({
+  key: 'sid',
+  secret: 'youngjun',
+  resave: false,
+  saveUninitialized: true,
+  store: new FileStore(),
+  cookie: {
+    maxAge: 1000 * 60 * 60 // 쿠키 유효기간 1시간
+  }
+
+}));
 app.use(
   bodyParser.urlencoded({
     extended: true,
