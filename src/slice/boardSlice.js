@@ -11,7 +11,6 @@ export const boardSlice = createSlice({
     reducers: {
         getBoard: (state, { payload }) => {
             console.log('게시글 목록 조회 액션 호출 -- getBoard');
-            console.log('토근 체크 추가할 부분')
         },
         getBoardSuccessAsync: (state, { payload: data }) => {
             console.log('saga에서 put 액션 호출 -- getBoardSuccessAsync');

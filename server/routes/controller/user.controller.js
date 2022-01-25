@@ -4,12 +4,8 @@
  * */
 
 const approot = require('app-root-path');
-const configfile = require(`${approot}/config/config.json`);
-const runmode = configfile.runmode;
-const config = configfile[runmode];
-const axios = require('axios');
+const userModel = require(`${approot}/server/routes/model/user.model`);
 const crypto = require('crypto');
-const UserModel = require(`${approot}/server/routes/model/user.model`);
 
 const password_crypto = (password) => {
     return crypto.createHash('sha512').update(password).digest('base64');
@@ -23,11 +19,11 @@ const login = doAsync(async (req, res, next) => {
     let userPwd = password_crypto(userInfo.userPwd);
 
     try {
-        let result = await UserModel.login(userId, userPwd);
+        let result = await userModel.login(userId, userPwd);
 
         let count = result.hits.total.value;
         result = result.hits.hits;
-        console.log('result::', result);
+        // console.log('result::', result);
         if (count == 0) {
             // return res.send({
             //     result: 'fail',
@@ -40,7 +36,7 @@ const login = doAsync(async (req, res, next) => {
                 id: result[0]._source.id,
             };
             console.log('세션정보 : : :', session);
-            res.send({
+            return res.send({
                 status: 'success',
                 data: session.user,
             });
@@ -58,7 +54,7 @@ const userCheck = doAsync(async (req, res, next) => {
                 status: 'fail',
             });
         } else {
-            res.send({
+            return res.send({
                 status: 'success',
                 data: req.session.user,
             });
