@@ -1,5 +1,5 @@
 import { put } from 'redux-saga/effects';
-import Axios from 'axios';
+import axios from 'axios';
 // import { boardActions } from '../slice/boardSlice';
 import { userActions } from '../slice/userSlice';
 import { v4 as uuidv4 } from 'uuid';
@@ -12,8 +12,8 @@ export function* loginUserAsync(action) {
         userId: data.id,
         userPwd: data.pwd,
     };
-    const responseForUser = yield Axios.post('/login', setParam);
-
+    const responseForUser = yield axios.post('/login', setParam);
+    console.log(12312312, responseForUser);
     if (responseForUser.data.status === 'success') {
         window.sessionStorage.setItem('status', 'login');
         yield put(
@@ -27,7 +27,7 @@ export function* loginUserAsync(action) {
         yield put(
             userActions.loginUserState({
                 id: '',
-                status: 'logout',
+                status: 'fail',
             })
         );
     }
@@ -36,7 +36,7 @@ export function* loginUserAsync(action) {
 export function* loginUserCheckAsync(action) {
     const data = action.payload;
 
-    const responseForCheck = yield Axios.post('/userCheck');
+    const responseForCheck = yield axios.post('/userCheck');
     if (responseForCheck.data.status === 'success') {
         window.sessionStorage.setItem('status', 'login');
         yield put(

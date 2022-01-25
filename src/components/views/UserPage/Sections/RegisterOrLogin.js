@@ -5,7 +5,7 @@ import { userActions } from 'slice/userSlice';
 
 function RegisterOrLogin() {
     const dispatch = useDispatch();
-
+    const joinPwd = useRef();
     const idInput = useRef();
     const pwdInput = useRef();
 
@@ -25,18 +25,34 @@ function RegisterOrLogin() {
         }
         dispatch(userActions.loginUser(user));
     };
+    const enterKey = (event) => {
+        if (event.key == 'Enter') {
+            sendLoginInfo();
+        }
+    };
     return (
         <div style={{ width: '80%', margin: '3rem auto' }}>
             <br />
             <div style={{ width: '80%', margin: '2rem auto' }}>
-                <label>id: </label>
-                <Input ref={idInput} type="text" name="id" />
+                <label>group id: </label>
+                <Input ref={idInput} onKeyPress={enterKey} type="text" name="id" />
                 <label>pwd: </label>
-                <Input ref={pwdInput} type="password" name="pwd" />
+                <Input ref={pwdInput} onKeyPress={enterKey} type="password" name="pwd" />
             </div>
-            <Button type="primary" onClick={sendLoginInfo}>
-                Login
-            </Button>
+            <div style={{ margin: '0 auto 0 auto', width: '300px' }}>
+                <Button type="primary" onClick={sendLoginInfo}>
+                    login
+                </Button>
+                <Button type="primary" style={{ marginLeft: '15px' }}>
+                    join
+                </Button>
+                <Button type="primary" style={{ marginLeft: '15px' }}>
+                    edit
+                </Button>
+                <Button type="primary" style={{ marginLeft: '15px' }}>
+                    leave
+                </Button>
+            </div>
         </div>
     );
 }
