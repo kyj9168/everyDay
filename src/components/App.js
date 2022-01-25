@@ -15,15 +15,15 @@ function App() {
         dispatch(userActions.loginUserCheck());
     }, [dispatch]);
 
-    const { id, status, token, check } = useSelector((state) => ({
+    const { id, status } = useSelector((state) => ({
         id: state.userReducers.id,
         status: state.userReducers.status,
     }));
-
+    console.log('6666666', status);
     return (
         <div>
             <Switch>
-                <Route exact path="/" component={status == 'logout' ? UserPage : BoardPage} />
+                <Route exact path="/" component={status == 'login' ? BoardPage : UserPage} />
                 <Route exact path="/article/:articleId" component={ArticlePage} />
                 {/* <Route exact path="/register" component={id == 'none' || status == 'none' ? UserPage : RegisterPage} /> */}
                 {/* <Route exact path="/edit/:boardId" component={id == 'none' || status == 'none' ? UserPage : RegisterPage} /> */}

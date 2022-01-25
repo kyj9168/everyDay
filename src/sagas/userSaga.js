@@ -13,7 +13,7 @@ export function* loginUserAsync(action) {
         userPwd: data.pwd,
     };
     const responseForUser = yield axios.post('/login', setParam);
-
+    console.log(12312312, responseForUser);
     if (responseForUser.data.status === 'success') {
         window.sessionStorage.setItem('status', 'login');
         yield put(
@@ -27,7 +27,7 @@ export function* loginUserAsync(action) {
         yield put(
             userActions.loginUserState({
                 id: '',
-                status: 'logout',
+                status: 'fail',
             })
         );
     }

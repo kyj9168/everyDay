@@ -25,12 +25,10 @@ const login = doAsync(async (req, res, next) => {
         result = result.hits.hits;
         // console.log('result::', result);
         if (count == 0) {
-            // return res.send({
-            //     result: 'fail',
-            //     url: '/index',
-            //     session: session,
-            //     message: '계정을 찾을 수 없습니다.',
-            // });
+            return res.send({
+                result: 'fail',
+                message: '계정을 찾을 수 없습니다.',
+            });
         } else {
             req.session.user = {
                 id: result[0]._source.id,
