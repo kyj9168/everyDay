@@ -1,10 +1,36 @@
-import React, { useEffect, useState } from 'react';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import RegisterForm from './Sections/RegisterForm';
-import { articleActions } from '../../../slice/articleSlice';
+import React, { useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Button, Input } from 'antd';
+import JoditEditor from 'jodit-react';
+import { boardActions } from '../../../slice/boardSlice';
+import './style.css';
 
+const { TextArea } = Input;
 function RegisterPage(props) {
     const dispatch = useDispatch();
+    const titleInput = useRef();
+
+    const editor = useRef(null);
+
+    const config = {
+        readonly: false, // all options from https://xdsoft.net/jodit/doc/
+        uploader: {
+            insertImageAsBase64URI: true,
+        },
+        enter: 'P',
+        defaultMode: '1',
+        // buttons: 'image',
+        minHeight: 400,
+    };
+    // const config = {
+    //     readonly: false,
+    //     minHeight: 500,
+
+    //     enter: "P",
+    //     defaultMode: "1",
+    //     buttons:
+    //       "source |, bold, strikethrough, underline, italic, | ul, ol, outdent, indent, | font, fontsize, brush, | image, table |,align,undo,redo,\n,selectall,cut,copy,paste,eraser,copyformat,|,hr,symbol"
+    //   };
 
     // const { id, created, modified, title, content } = useSelector(
     //     (state) => ({
@@ -25,7 +51,7 @@ function RegisterPage(props) {
     //         dispatch(articleActions.fetchArticle(props.match.params.articleId));
     //         setIsForUpdate(true);
     //     }
-    // }, [id]);
+    // }, []);
 
     // const onRegisterChange = (event) => {
     //     const { name, value } = event.target;
@@ -59,16 +85,42 @@ function RegisterPage(props) {
     //         dispatch(articleActions.registerArticle(article));
     //     // }
     // };
+    const sendRegister = (event) => {
+        const register = {
+            title: titleInput.current.state.value,
+            content: editor.current.value,
+        };
+        // console.log('등록할 게시글:::', register);
+        dispatch(boardActions.setBoard(register));
+    };
 
     return (
         <>
-            <RegisterForm
-                // titleValue={title}
-                // contentValue={content}
-                // handleRegisterChange={onRegisterChange}
-                // handleSubmit={onSubmitArticle}
-                // updateRequest={IsForUpdate}
-            />
+            <div style={{ width: '80%', margin: '3rem auto' }}>
+                <a href="/">
+                    <Button>←</Button>
+                </a>
+                <br />
+                <div style={{ width: '80%', margin: '2rem auto' }}>
+                    <label>Title: </label>
+                    <Input ref={titleInput} type="text" name="title" />
+                    <hr></hr>
+                    <JoditEditor
+                        ref={editor}
+                        config={config}
+                        tabIndex={1} // tabIndex of textarea
+                        // onBlur={(newContent) => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
+                        // onChange={(newContent) => {
+                        //     debounce(setContent(newContent), 1000);
+                        // }}
+                    />
+
+                    {/* <TextArea ref={contextInput} rows="30" name="content" /> */}
+                </div>
+                <Button type="primary" onClick={sendRegister}>
+                    등록
+                </Button>
+            </div>
         </>
     );
 }

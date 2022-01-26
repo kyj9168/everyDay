@@ -26,7 +26,7 @@ module.exports = {
             // console.log('result::', result);
             if (count == 0) {
                 return res.send({
-                    result: 'fail',
+                    status: 'fail',
                     message: '계정을 찾을 수 없습니다.',
                 });
             } else {

@@ -54,7 +54,7 @@ function BoardPage() {
     return (
         <div style={{ width: '80%', margin: '3rem auto' }}>
             <div>
-                <Link to="/register">
+                <Link to="/register?isForEdit=false">
                     <Button type="primary">New Post</Button>
                 </Link>
             </div>

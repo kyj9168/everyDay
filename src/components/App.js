@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import BoardPage from './views/BoardPage/BoardPage';
+import BoardPage from './views/BoardPage';
 import { useDispatch, useSelector } from 'react-redux';
-import ArticlePage from './views/ArticlePage/ArticlePage';
-import RegisterPage from './views/RegisterPage/RegisterPage';
-import UserPage from 'components/views/UserPage/UserPage';
+import ArticlePage from './views/ArticlePage';
+import RegisterPage from './views/RegisterPage';
+import UserPage from 'components/views/UserPage';
 import { userActions } from 'slice/userSlice';
 import '../App.css';
 

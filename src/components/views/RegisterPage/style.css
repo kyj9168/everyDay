@@ -1,0 +1,11 @@
+/* .jodit-toolbar-button,
+.jodit-ui-separator,
+.jodit-tabs__buttons,
+.jodit-status-bar,*/
+.jodit-status-bar {
+    display: none !important;
+}
+
+.jodit-toolbar-button_image {
+    display: block !important;
+}

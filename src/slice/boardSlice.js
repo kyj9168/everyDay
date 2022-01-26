@@ -12,6 +12,9 @@ export const boardSlice = createSlice({
         getBoard: (state, { payload }) => {
             console.log('게시글 목록 조회 액션 호출 -- getBoard');
         },
+        setBoard: (state, { payload }) => {
+            console.log('게시글 등록  액션 호출 -- setBoard');
+        },
         getBoardSuccessAsync: (state, { payload: data }) => {
             console.log('saga에서 put 액션 호출 -- getBoardSuccessAsync');
             return {

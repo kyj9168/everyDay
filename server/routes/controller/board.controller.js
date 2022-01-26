@@ -14,7 +14,7 @@ module.exports = {
             let result = await boardModel.boardList(userId);
             let count = result.hits.total.value;
             result = result.hits.hits;
-            console.log('result::', result);
+            // console.log('result::', result);
             let resultArr = [];
             for (let val of result) {
                 val._source.id = val._id;
@@ -52,27 +52,26 @@ module.exports = {
                     data: result[0]._source,
                 });
             }
-            // console.log('result::', result);
-            // let resultArr = [];
-            // for (let val of result) {
-            //     val._source.id = val._id;
-            //     resultArr.push(val._source);
-            // }
-            // if (count == 0) {
-            //     return res.send({
-            //         result: 'success',
-            //         message: '게시물이 없습니다.',
-            //     });
-            // } else {
-            //     //     req.session.user = {
-            //     //         id: result[0]._source.id,
-            //     //     };
-            //     //     console.log('세션정보 : : :', session);
-            //     res.send({
-            //         status: 'success',
-            //         data: resultArr,
-            //     });
-            // }
+        } catch (err) {
+            throw err;
+        }
+    },
+
+    setBoard: async (req, res, next) => {
+        let session = req.session;
+        const userId = session.user.id;
+        try {
+            const title = req.body.title;
+            const content = req.body.content;
+
+            let result = await boardModel.setBoard(title, content, userId);
+            console.log('result::::', result);
+            if (result.result === 'created') {
+                return res.send({
+                    status: 'success',
+                    data: session.user,
+                });
+            }
         } catch (err) {
             throw err;
         }

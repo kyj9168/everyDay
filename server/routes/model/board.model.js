@@ -1,5 +1,8 @@
 const approot = require('app-root-path');
 const esService = require(`${approot}/server/utils/elasticsearch.service.js`);
+const moment = require('moment');
+const { v4: uuidv4 } = require('uuid');
+
 const indexName = 'rb_board';
 const docType = '_doc';
 let payload = {};
@@ -47,6 +50,22 @@ module.exports = {
         };
         try {
             const result = await esService.search(indexName, docType, payload);
+            return result;
+        } catch (err) {
+            throw err;
+        }
+    },
+    setBoard: async (title, content, userId) => {
+        payload = {
+            title: title,
+            content: content,
+            userId: userId,
+            created: moment().format('YYYY-MM-DD HH:mm:ss'),
+            modified: moment().format('YYYY-MM-DD HH:mm:ss'),
+        };
+        try {
+            // addDocument: (indexName, _id, docType, payload) =
+            const result = await esService.addDocument(indexName, uuidv4(), docType, payload);
             return result;
         } catch (err) {
             throw err;
