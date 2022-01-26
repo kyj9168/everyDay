@@ -20,21 +20,11 @@ module.exports = {
                 val._source.id = val._id;
                 resultArr.push(val._source);
             }
-            if (count == 0) {
-                return res.send({
-                    result: 'success',
-                    message: '게시물이 없습니다.',
-                });
-            } else {
-                //     req.session.user = {
-                //         id: result[0]._source.id,
-                //     };
-                //     console.log('세션정보 : : :', session);
-                return res.send({
-                    status: 'success',
-                    data: resultArr,
-                });
-            }
+
+            return res.send({
+                status: 'success',
+                data: resultArr,
+            });
         } catch (err) {
             throw err;
         }

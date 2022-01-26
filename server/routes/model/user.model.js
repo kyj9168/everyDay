@@ -1,5 +1,6 @@
 const approot = require('app-root-path');
 const esService = require(`${approot}/server/utils/elasticsearch.service.js`);
+const moment = require('moment');
 const indexName = 'rb_user';
 const docType = '_doc';
 let payload = {};
@@ -32,21 +33,36 @@ module.exports = {
         }
     },
 
-    // idCheck: async (data) => {
-    //     payload = {
-    //         query: {
-    //             match: {
-    //                 'id.keyword': data,
-    //             },
-    //         },
-    //     };
-    //     try {
-    //         const result = await esService.search(indexName, docType, payload);
-    //         return result;
-    //     } catch (err) {
-    //         throw err;
-    //     }
-    // },
+    idCheck: async (userId) => {
+        payload = {
+            query: {
+                term: {
+                    id: userId,
+                },
+            },
+        };
+        try {
+            const result = await esService.search(indexName, docType, payload);
+            return result;
+        } catch (err) {
+            throw err;
+        }
+    },
+    joinUser: async (userId, userPwd) => {
+        payload = {
+            id: userId,
+            pwd: userPwd,
+            created: moment().format('YYYY-MM-DD HH:mm:ss'),
+            modified: moment().format('YYYY-MM-DD HH:mm:ss'),
+        };
+        try {
+            // addDocument: (indexName, _id, docType, payload) =
+            const result = await esService.addDocument(indexName, userId, docType, payload);
+            return result;
+        } catch (err) {
+            throw err;
+        }
+    },
 
     // join: async (data) => {
     //     payload = {

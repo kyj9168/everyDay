@@ -9,8 +9,10 @@ export function* getBoardAsync() {
 
         const boardData = responseForBoard.data;
         if (boardData.status === 'success') {
+
             yield put(boardActions.getBoardSuccessAsync(boardData.data));
         }
+        console.log('boardData:::', boardData);
     } catch (e) {
         yield put(boardActions.getBoardFailedAsync(e.message));
     }

@@ -13,10 +13,14 @@ export const userSlice = createSlice({
         },
 
         loginUser: (state, { payload: user }) => {
-            console.log('유저 로그인 버튼 호출 -- loginUser'); // saga 애서 감시용
+            console.log('유저 로그인 버튼 호출 -- loginUser'); 
+        },
+        joinUser: (state, { payload: user }) => {
+            console.log('유저 회원가입 버튼 호출 -- joinUser');
         },
 
         loginUserState: (state, { payload: data }) => {
+            console.log('유저 정보 state -- loginUserState');
             return {
                 ...state,
                 id: data.id || '',

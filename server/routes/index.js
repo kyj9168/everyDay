@@ -7,6 +7,7 @@ const boardController = require(approot + '/server/routes/controller/board.contr
 
 router.post('/login', userController.login);
 router.post('/userCheck', userController.userCheck);
+router.post('/join', userController.join);
 router.get('/getIp', userController.getIp);
 router.post('/boardList', boardController.boardList);
 router.post('/board', boardController.board);
