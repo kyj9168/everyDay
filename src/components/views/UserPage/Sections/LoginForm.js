@@ -5,7 +5,7 @@ import { userActions } from 'slice/userSlice';
 import { modalActions } from 'slice/modalSlice';
 import { Link, useHistory } from 'react-router-dom';
 
-function RegisterOrLogin() {
+function LoginForm() {
     const dispatch = useDispatch();
 
     const idInput = useRef();
@@ -130,4 +130,4 @@ function RegisterOrLogin() {
     );
 }
 
-export default RegisterOrLogin;
+export default LoginForm;
