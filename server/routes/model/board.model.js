@@ -18,6 +18,14 @@ module.exports = {
                 },
             },
             _source: ['title'],
+            sort: [
+                {
+                    'created.keyword': {
+                        order: 'desc',
+                    },
+                },
+            ],
+            size: 1000,
         };
         try {
             const result = await esService.search(indexName, docType, payload);

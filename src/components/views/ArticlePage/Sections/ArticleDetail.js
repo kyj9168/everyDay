@@ -26,9 +26,9 @@ function ArticleDetail(props) {
                     </colgroup>
                     <tbody>
                         <tr>
-                            <th>번호</th>
-                            <td>{props.id}</td>
-                            <th>조회수</th>
+                            {/* <th>번호</th>
+                            <td>{props.id}</td> */}
+                            {/* <th>조회수</th> */}
                             <td>{props.views}</td>
                         </tr>
                         <tr>

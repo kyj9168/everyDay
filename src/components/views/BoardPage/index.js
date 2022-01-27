@@ -14,6 +14,7 @@ function BoardPage() {
     const history = useHistory();
 
     useEffect(() => {
+        dispatch(articleActions.initializationRegisterInput());
         dispatch(boardActions.getBoard());
     }, [dispatch]);
 
@@ -24,22 +25,22 @@ function BoardPage() {
         error: state.boardReducers.error,
     }));
 
-    const createCommentLength = createSelector(
-        (state) => state.boardReducers.board,
-        (state) => state.commentReducers.comments,
-        (articles, comments) => {
-            const commentByArticle = {};
-            for (var index in articles) {
-                if (!comments) return commentByArticle;
+    // const createCommentLength = createSelector(
+    //     (state) => state.boardReducers.board,
+    //     (state) => state.commentReducers.comments,
+    //     (articles, comments) => {
+    //         const commentByArticle = {};
+    //         for (var index in articles) {
+    //             if (!comments) return commentByArticle;
 
-                const filteredComments = comments.filter((comment) => comment.articleId === articles[index].id);
-                commentByArticle[articles[index].id] = filteredComments.length;
-            }
-            return commentByArticle;
-        }
-    );
+    //             const filteredComments = comments.filter((comment) => comment.articleId === articles[index].id);
+    //             commentByArticle[articles[index].id] = filteredComments.length;
+    //         }
+    //         return commentByArticle;
+    //     }
+    // );
 
-    const commentLength = useSelector(createCommentLength);
+    // const commentLength = useSelector(createCommentLength);
 
     const onDeleteClick = (id) => {
         if (!window.confirm('삭제하시겠습니까?')) return false;
@@ -49,6 +50,7 @@ function BoardPage() {
     const onArticleTitleClick = (id) => {
         const path = `/article/${id}`;
         history.push(path);
+        // dispatch(articleActions.getArticle(id));
     };
 
     return (
@@ -67,7 +69,7 @@ function BoardPage() {
                 ) : isSuccess && board.length > 0 ? (
                     <BoardList
                         board={board}
-                        commentLength={commentLength}
+                        // commentLength={commentLength}
                         handleDeleteClick={onDeleteClick}
                         handleArticleTitleClick={onArticleTitleClick}
                     />

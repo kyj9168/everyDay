@@ -7,6 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 import store from "./store";
 import history from "./utils/history";
 
+
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>

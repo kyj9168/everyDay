@@ -4,11 +4,11 @@ export const articleSlice = createSlice({
     name: 'article',
     initialState: {
         id: 0,
-        title: '',
-        content: '',
-        userId: '',
-        created: Date.now(),
-        modified: Date.now(),
+        title: 'loading...',
+        content: 'loading...',
+        userId: 'loading...',
+        created: 'loading...',
+        modified: 'loading...',
     },
     reducers: {
         registerArticle: (state, { payload: article }) => {
@@ -54,6 +54,17 @@ export const articleSlice = createSlice({
                 default:
                     break;
             }
+        },
+        initializationRegisterInput: (state, { payload }) => {
+            return {
+                ...state,
+                id: 0,
+                title: 'loading...',
+                content: 'loading...',
+                userId: 'loading...',
+                created: 'loading...',
+                modified: 'loading...',
+            };
         },
     },
 });

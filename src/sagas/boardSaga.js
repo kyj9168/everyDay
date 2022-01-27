@@ -1,7 +1,6 @@
 import { put } from 'redux-saga/effects';
 import axios from 'axios';
 import { boardActions } from '../slice/boardSlice';
-import { commentActions } from '../slice/commentSlice';
 
 import history from '../utils/history';
 export function* getBoardAsync() {
@@ -31,7 +30,8 @@ export function* setBoardAsync(action) {
         const boardData = responseForBoard.data;
         console.log('등록 성공::::::::::::', boardData);
         if (boardData.status === 'success') {
-            history.go(1);
+            alert('게시글이 등록되었습니다.')
+            history.goBack()
         }
         //     yield put(boardActions.getBoardSuccessAsync(boardData.data));
         // }

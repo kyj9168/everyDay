@@ -5,7 +5,7 @@ import { boardActions } from '../slice/boardSlice';
 import { userActions } from '../slice/userSlice';
 import {
     //   registerArticleAsync,
-    getArticleAsync,
+    getArticleSaga,
     //   fetchArticleAsync,
     //   updateArticleAsync,
     //   deleteArticleAsync,
@@ -39,7 +39,7 @@ export default function* rootWatcher() {
     yield takeEvery(loginUserCheck.type, loginUserCheckAsync);
     yield takeLatest(getBoard.type, getBoardAsync);
     yield takeLatest(setBoard.type, setBoardAsync);
-    yield takeLatest(getArticle.type, getArticleAsync);
+    yield takeLatest(getArticle.type, getArticleSaga);
     // yield takeEvery(fetchArticle.type, fetchArticleAsync);
     // yield takeLatest(updateArticle.type, updateArticleAsync);
     // yield takeLatest(deleteArticle.type, deleteArticleAsync);

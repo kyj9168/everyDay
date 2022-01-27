@@ -90,6 +90,15 @@ function RegisterPage(props) {
             title: titleInput.current.state.value,
             content: editor.current.value,
         };
+
+        if (!register.title) {
+            alert('제목을 입력하십시오.');
+            return false;
+        }
+        if (!register.content) {
+            alert('내용을 입력하십시오.');
+            return false;
+        }
         // console.log('등록할 게시글:::', register);
         dispatch(boardActions.setBoard(register));
     };
