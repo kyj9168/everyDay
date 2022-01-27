@@ -17,6 +17,7 @@ module.exports = {
                     },
                 },
             },
+            _source: ['title'],
         };
         try {
             const result = await esService.search(indexName, docType, payload);
