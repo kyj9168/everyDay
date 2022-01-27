@@ -8,14 +8,10 @@ import {
     getArticleSaga,
     //   fetchArticleAsync,
     //   updateArticleAsync,
-    //   deleteArticleAsync,
+      deleteArticleAsync,
 } from './articleSaga';
 import { getBoardAsync,setBoardAsync } from './boardSaga';
-// import {
-//   registerCommentAsync,
-//   getCommentsAsync,
-//   deleteCommentAsync,
-// } from "./commentSaga";
+
 import { loginUserAsync, loginUserCheckAsync, sendJoinUser } from './userSaga';
 
 const {
@@ -24,7 +20,7 @@ const {
     getArticle,
     //   fetchArticle,
     //   updateArticle,
-    //   deleteArticle,
+      deleteArticle,
 } = articleActions;
 const { getBoard,setBoard } = boardActions;
 const { loginUser, loginUserCheck, joinUser } = userActions;
@@ -42,7 +38,7 @@ export default function* rootWatcher() {
     yield takeLatest(getArticle.type, getArticleSaga);
     // yield takeEvery(fetchArticle.type, fetchArticleAsync);
     // yield takeLatest(updateArticle.type, updateArticleAsync);
-    // yield takeLatest(deleteArticle.type, deleteArticleAsync);
+    yield takeLatest(deleteArticle.type, deleteArticleAsync);
     // yield takeLatest(registerComment.type, registerCommentAsync);
     // yield takeEvery(getComments.type, getCommentsAsync);
     // yield takeLatest(deleteComment.type, deleteCommentAsync);

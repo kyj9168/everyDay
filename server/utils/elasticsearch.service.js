@@ -124,6 +124,17 @@ module.exports = {
                 throw err;
             }),
 
+    deleteByQuery: (index, query) =>
+        elasticClient
+            .deleteByQuery({
+                index,
+                body: query,
+            })
+            .catch((err) => {
+                console.log(err);
+                throw err;
+            }),
+
     // Delete all
     deleteAll: (req, res) => {
         elasticClient.indices.delete(

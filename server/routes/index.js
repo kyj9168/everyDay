@@ -9,9 +9,11 @@ router.post('/login', userController.login);
 router.post('/userCheck', userController.userCheck);
 router.post('/join', userController.join);
 router.get('/getIp', userController.getIp);
+
 router.post('/boardList', boardController.boardList);
 router.post('/board', boardController.board);
 router.post('/setBoard', boardController.setBoard);
+router.post('/deleteBoard', boardController.deleteBoard);
 
 router.get('/', (req, res, next) => {
     if (req.path.split('/')[1] === 'static') return next();

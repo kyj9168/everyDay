@@ -50,13 +50,14 @@ export function* updateArticleAsync(action) {
 }
 
 export function* deleteArticleAsync(action) {
-    const id = action.payload;
+    const boardId = action.payload;
 
-    yield axios.delete(`http://localhost:4000/board/${id}`);
-
+    const responseForDelete = yield axios.post(`/deleteBoard`, { boardId });
+    console.log('responseForDelete', responseForDelete);
+    // const ArticleData = responseForArticle.data;
     alert('삭제되었습니다.');
 
     history.push(`/`);
 
-    history.go(0);
+    // history.go(0);
 }

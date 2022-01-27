@@ -6,27 +6,22 @@ function BoardList(props) {
     return (
         <div>
             <table style={{ width: '100%' }}>
-                <colgroup>
-                    <col width="10%" />
-                    <col width="70%" />
-                    <col width="10%" />
-                    <col width="10%" />
-                </colgroup>
+               
                 <tbody>
                     <tr>
+                        <th>날짜</th>
                         <th>제목</th>
-                        <th></th>
                     </tr>
                 </tbody>
                 <tbody>
-                    {props.board.map((article) => {
-                        console.log('article:::', article);
+                    {props.boardList.map((board) => {
+                        console.log('board:::', board);
                         return (
-                            <tr key={article.id}>
-                                {/* <td>{board.id}</td> */}
+                            <tr key={board.id} onClick={() => props.handleArticleTitleClick(board.id)}>
+                                <td>{board.created}</td>
 
-                                <td onClick={() => props.handleArticleTitleClick(article.id)}>
-                                    {article.title}
+                                <td >
+                                    {board.title}
                                     {/* &nbsp;
                                 {props.commentLength[board.id] > 0 && `[${props.commentLength[board.id]}]`} */}
                                 </td>

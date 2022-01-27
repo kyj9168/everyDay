@@ -68,7 +68,7 @@ function BoardPage() {
                     <h2>에러 발생: {error}</h2>
                 ) : isSuccess && board.length > 0 ? (
                     <BoardList
-                        board={board}
+                        boardList={board}
                         // commentLength={commentLength}
                         handleDeleteClick={onDeleteClick}
                         handleArticleTitleClick={onArticleTitleClick}

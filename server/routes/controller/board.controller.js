@@ -76,4 +76,25 @@ module.exports = {
             throw err;
         }
     },
+    deleteBoard: async (req, res, next) => {
+        let session = req.session;
+        const userId = session.user.id;
+        try {
+            const boardId = req.body.boardId;
+            let result = await boardModel.deleteBoard(boardId, userId);
+            console.log('result::::', result);
+            if (result.deleted > 0) {
+                return res.send({
+                    status: 'success',
+                    data: session.user,
+                });
+            } else {
+                return res.send({
+                    status: 'fail',
+                });
+            }
+        } catch (err) {
+            throw err;
+        }
+    },
 };
