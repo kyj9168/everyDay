@@ -20,7 +20,7 @@ function RegisterPage(props) {
         enter: 'P',
         defaultMode: '1',
         // buttons: 'image',
-        minHeight: 400,
+        // minHeight: 300,
     };
     // const config = {
     //     readonly: false,
@@ -105,12 +105,12 @@ function RegisterPage(props) {
 
     return (
         <>
-            <div style={{ width: '80%', margin: '3rem auto' }}>
+            <div style={{ width: 'calc(100% - 30px)', margin: '1rem auto' }}>
                 <a href="/">
                     <Button>←</Button>
                 </a>
                 <br />
-                <div style={{ width: '80%', margin: '2rem auto' }}>
+                <div style={{ width: '100%', margin: '1rem auto' }}>
                     <label>Title: </label>
                     <Input ref={titleInput} type="text" name="title" />
                     <hr></hr>
@@ -118,6 +118,7 @@ function RegisterPage(props) {
                         ref={editor}
                         config={config}
                         tabIndex={1} // tabIndex of textarea
+                        style={{ height: 'calc(100vh - 300px)' }}
                         // onBlur={(newContent) => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
                         // onChange={(newContent) => {
                         //     debounce(setContent(newContent), 1000);

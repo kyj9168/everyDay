@@ -6,6 +6,10 @@
     display: none !important;
 }
 
-.jodit-toolbar-button_image {
+/* .jodit-toolbar-button_image {
     display: block !important;
+} */
+.jodit-workplace {
+    height: calc(100vh - 350px) !important;
 }
+

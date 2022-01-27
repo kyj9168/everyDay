@@ -24,17 +24,19 @@ app.use(
         cookie: {
             maxAge: 1000 * 60 * 60, // 쿠키 유효기간 1시간
         },
+        rolling: true,
+        saveUninitialized: true,
     })
 );
 app.use(
     bodyParser.urlencoded({
-        limit: '50mb',
+        limit: '200mb',
         extended: true,
     })
 );
 app.use(
     bodyParser.json({
-        limit: '50mb',
+        limit: '200mb',
     })
 );
 
