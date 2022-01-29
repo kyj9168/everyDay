@@ -17,7 +17,7 @@ module.exports = {
                     },
                 },
             },
-            _source: ['title', 'created', 'day', 'group'],
+            _source: ['title', 'created', 'day', 'group','modified'],
             sort: [
                 {
                     group: {
@@ -25,7 +25,7 @@ module.exports = {
                     },
                 },
                 {
-                    created: {
+                    modified: {
                         order: 'asc',
                     },
                 },

@@ -51,4 +51,13 @@
     text-align: center;
     overflow: hidden;
     text-overflow: ellipsis;
+    div {
+        color: black;
+        background: #ffc136;
+        width: 30px;
+        font-size: 5px;
+        position: absolute;
+        margin-top: 3px;
+        border-radius: 5px;
+    }
 }
