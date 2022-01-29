@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { boardActions } from '../../../slice/boardSlice';
 import { articleActions } from '../../../slice/articleSlice';
 import { createSelector } from '@reduxjs/toolkit';
-import './style.css';
+import './style.scss';
 const { Title } = Typography;
 
 function BoardPage() {
@@ -61,7 +61,14 @@ function BoardPage() {
                 </Link>
             </div>
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                <Title>게시판</Title>
+                {/* <Title>게시판</Title> */}
+                <img
+                    style={{
+                        width: '150px',
+                    }}
+                    src="/images/logo.png"
+                    alt="logo"
+                />
             </div>
 
             {error ? (

@@ -20,12 +20,17 @@ module.exports = {
             _source: ['title', 'created', 'day', 'group'],
             sort: [
                 {
-                    created: {
+                    group: {
                         order: 'desc',
                     },
                 },
+                {
+                    created: {
+                        order: 'asc',
+                    },
+                },
             ],
-            size: 1000,
+            size: 10000,
         };
         try {
             const result = await esService.search(indexName, docType, payload);

@@ -6,7 +6,7 @@ function BoardList(props) {
     const breakpointColumnsObj = {
         default: 4,
         1100: 3,
-        700: 2,
+        800: 2,
         500: 1,
     };
     return (
@@ -25,7 +25,9 @@ function BoardList(props) {
                                     <div className="day" key={object.id}>
                                         {object.day}
                                     </div>
-                                    <div className="title">{object.title}</div>
+                                    <div className="title" title={object.title}>
+                                        {object.title}
+                                    </div>
                                 </div>
                             );
                         })}
