@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { boardActions } from '../../../slice/boardSlice';
 import { articleActions } from '../../../slice/articleSlice';
 import { createSelector } from '@reduxjs/toolkit';
-
+import './style.css';
 const { Title } = Typography;
 
 function BoardPage() {
@@ -63,22 +63,21 @@ function BoardPage() {
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
                 <Title>게시판</Title>
             </div>
-            <div>
-                {error ? (
-                    <h2>에러 발생: {error}</h2>
-                ) : isSuccess && board.length > 0 ? (
-                    <BoardList
-                        boardList={board}
-                        // commentLength={commentLength}
-                        handleDeleteClick={onDeleteClick}
-                        handleArticleTitleClick={onArticleTitleClick}
-                    />
-                ) : isSuccess && board.length <= 0 ? (
-                    <p> 조회할 내용이 없습니다. </p>
-                ) : (
-                    <p> 목록을 불러오는 중입니다. </p>
-                )}
-            </div>
+
+            {error ? (
+                <h2>에러 발생: {error}</h2>
+            ) : isSuccess && board.length > 0 ? (
+                <BoardList
+                    boardList={board}
+                    // commentLength={commentLength}
+                    handleDeleteClick={onDeleteClick}
+                    handleArticleTitleClick={onArticleTitleClick}
+                />
+            ) : isSuccess && board.length <= 0 ? (
+                <p> 조회할 내용이 없습니다. </p>
+            ) : (
+                <p> 목록을 불러오는 중입니다. </p>
+            )}
         </div>
     );
 }

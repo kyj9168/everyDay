@@ -46,28 +46,7 @@ function ArticleDetail(props) {
                     </tbody>
                 </table>
             </div>
-            <div>
-                {props.loadComments.length > 0 &&
-                    props.loadComments.map((comment) => (
-                        <div
-                            style={{
-                                width: '100%',
-                                backgroundColor: 'lightsteelblue',
-                                border: '1px dotted black',
-                            }}
-                        >
-                            <span key={comment.id}>
-                                <span>{comment.content}</span>
-                                <span style={{ float: 'right' }}>
-                                    {new Date(comment.date).toLocaleString()}&nbsp;
-                                    <span style={{ cursor: 'pointer' }} onClick={() => props.deleteComment(comment.id)}>
-                                        [X]
-                                    </span>
-                                </span>
-                            </span>
-                        </div>
-                    ))}
-            </div>
+           
             <div style={{ margin: '2rem auto' }}>{props.handleComment}</div>
             <div style={{ margin: '2rem auto' }}>
                 <Link to={`/edit/${props.id}?isForEdit=true`}>

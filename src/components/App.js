@@ -20,14 +20,12 @@ function App() {
         status: state.userReducers.status,
     }));
     return (
-        <div>
-            <Switch>
-                <Route exact path="/" component={status == 'login' ? BoardPage : UserPage} />
-                <Route exact path="/article/:articleId" component={status == 'login' ? ArticlePage : UserPage} />
-                <Route exact path="/register" component={status == 'login' ? RegisterPage : UserPage} />
-                {/* <Route exact path="/edit/:boardId" component={id == 'none' || status == 'none' ? UserPage : RegisterPage} /> */}
-            </Switch>
-        </div>
+        <Switch>
+            <Route exact path="/" component={status == 'login' ? BoardPage : UserPage} />
+            <Route exact path="/article/:articleId" component={status == 'login' ? ArticlePage : UserPage} />
+            <Route exact path="/register" component={status == 'login' ? RegisterPage : UserPage} />
+            {/* <Route exact path="/edit/:boardId" component={id == 'none' || status == 'none' ? UserPage : RegisterPage} /> */}
+        </Switch>
     );
 }
 

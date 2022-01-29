@@ -21,9 +21,24 @@ module.exports = {
                 resultArr.push(val._source);
             }
 
+            const groupBy = (list, keyGetter) => {
+                const map = new Map();
+                list.forEach((item) => {
+                    const key = keyGetter(item);
+                    if (!map.has(key)) {
+                        map.set(key, [item]);
+                    } else {
+                        map.get(key).push(item);
+                    }
+                });
+                return map;
+            };
+
+            const resData = groupBy(resultArr, (group) => group.group);
+            // console.log(resData);
             return res.send({
                 status: 'success',
-                data: resultArr,
+                data: [...resData],
             });
         } catch (err) {
             throw err;

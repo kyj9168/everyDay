@@ -17,10 +17,10 @@ module.exports = {
                     },
                 },
             },
-            _source: ['title', 'created'],
+            _source: ['title', 'created', 'day', 'group'],
             sort: [
                 {
-                    'created.keyword': {
+                    created: {
                         order: 'desc',
                     },
                 },
@@ -69,7 +69,9 @@ module.exports = {
             title: title,
             content: content,
             userId: userId,
-            created: moment().format('YYYY-MM-DD HH:mm:ss'),
+            created: moment().format('YYYY-MM-DD'),
+            group: moment().format('YYYY년 MM월'),
+            day: moment().format('DD'),
             modified: moment().format('YYYY-MM-DD HH:mm:ss'),
         };
         try {
