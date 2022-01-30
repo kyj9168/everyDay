@@ -1,10 +1,10 @@
 import React, { useRef } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { Button, Input } from 'antd';
+// import { Button, Input } from 'antd';
 import { userActions } from 'slice/userSlice';
 import { modalActions } from 'slice/modalSlice';
 import { Link, useHistory } from 'react-router-dom';
-import './style.css';
+import './style.scss';
 function UserPage(props) {
     const dispatch = useDispatch();
 
@@ -19,8 +19,8 @@ function UserPage(props) {
 
     const sendLoginInfo = () => {
         const user = {
-            id: idInput.current.state.value,
-            pwd: pwdInput.current.state.value,
+            id: idInput.current.value,
+            pwd: pwdInput.current.value,
         };
 
         if (!user.id) {
@@ -89,53 +89,64 @@ function UserPage(props) {
         // history.push(path);
     };
     return (
-        <>
+        <div className="userPageDiv">
             <div style={{ textAlign: 'center' }}>
-                <img src="/images/logo.png" alt="logo" style={{ marginTop: '50px', width: '300px' }} />
-                {/* <Title>로그인</Title> */}
+                <img
+                    src="/images/logo.png"
+                    alt="logo"
+                    style={{ textAlign: 'center', marginBottom: '5vmin', width: '300px' }}
+                />
             </div>
 
-            <div style={{ width: '80%', margin: '0rem auto' }}>
-                <br />
-                <div style={{ width: '80%', margin: '2rem auto' }}>
-                    <label>id </label>
-                    <Input ref={idInput} onKeyPress={enterKey} type="text" name="id" />
-                    <label>pwd </label>
-                    <Input ref={pwdInput} onKeyPress={enterKey} type="password" name="pwd" />
+            <div className="loginDiv">
+                <input
+                    maxLength="20"
+                    placeholder="아이디를 입력하세요."
+                    ref={idInput}
+                    onKeyPress={enterKey}
+                    type="text"
+                    name="id"
+                />
+
+                <input
+                    placeholder="비밀번호를 입력하세요."
+                    ref={pwdInput}
+                    onKeyPress={enterKey}
+                    type="password"
+                    name="pwd"
+                    maxLength="20"
+                />
+                <div>
+                    <button onClick={sendLoginInfo}>LOGIN</button>
+                    <button onClick={inJoinUserPage}>JOIN</button>
                 </div>
-                <p className="userModal" style={{ textAlign: 'center', display: status === 'fail' ? '' : 'none' }}>
-                    계정을 찾지 못햇습니다. 아이디 및 비밀번호를 확인해 주세요.
-                </p>
-                <div className="joinModal" style={{ display: joinModalState ? 'block' : 'none' }}>
-                    <p>아이디 및 비밀번호를 입력하세요. </p>
-                    <input type="button" value="닫기" onClick={outJoinUserPage} />
-                    <label>id </label>
-                    <Input ref={joinId} onKeyPress={joinEnterKey} type="text" name="joinId" />
-                    <label>pwd </label>
-                    <Input ref={joinPwd} onKeyPress={joinEnterKey} type="password" name="joinPwd" />
-                    <label>pwd check</label>
-                    <Input ref={joinPwdCheck} onKeyPress={joinEnterKey} type="password" name="joinPwdCheck" />
-                    <input type="button" value="회원가입" onClick={sendJoinInfo} />
-                </div>
-                <div style={{ margin: '0 auto 0 auto', width: 'fit-content' }}>
-                    <Button type="primary" onClick={sendLoginInfo}>
-                        login
-                    </Button>
-                    <Button type="primary" onClick={inJoinUserPage} style={{ marginLeft: '15px' }}>
-                        join
-                    </Button>
-                    <Button type="primary" onClick={inEditUserPage} style={{ marginLeft: '15px' }}>
+            </div>
+            <p className="userModal" style={{ textAlign: 'center', display: status === 'fail' ? '' : 'none' }}>
+                계정을 찾지 못햇습니다. 아이디 및 비밀번호를 확인해 주세요.
+            </p>
+            <div className="joinModal" style={{ display: joinModalState ? 'block' : 'none' }}>
+                <p>아이디 및 비밀번호를 입력하세요. </p>
+                <input type="button" value="닫기" onClick={outJoinUserPage} />
+                <label>id </label>
+                <input ref={joinId} onKeyPress={joinEnterKey} type="text" name="joinId" />
+                <label>pwd </label>
+                <input ref={joinPwd} onKeyPress={joinEnterKey} type="password" name="joinPwd" />
+                <label>pwd check</label>
+                <input ref={joinPwdCheck} onKeyPress={joinEnterKey} type="password" name="joinPwdCheck" />
+                <input type="button" value="회원가입" onClick={sendJoinInfo} />
+            </div>
+            <div style={{ margin: '0 auto 0 auto', width: 'fit-content' }}>
+                {/* <Button type="primary" onClick={inEditUserPage} style={{ marginLeft: '15px' }}>
                         edit
                     </Button>
                     <Button type="primary" onClick={inLeaveUserPage} style={{ marginLeft: '15px' }}>
                         leave
-                    </Button>
-                </div>
+                    </Button> */}
             </div>
 
             {/* <div style={{ display: check !=='join'? 'none' : '' }}>회원가입완료</div>
             <div style={{ display: check ? 'none' : '' }}>비밀번호를 확인해 주세요</div> */}
-        </>
+        </div>
     );
 }
 

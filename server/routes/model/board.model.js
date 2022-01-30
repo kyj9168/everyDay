@@ -17,7 +17,7 @@ module.exports = {
                     },
                 },
             },
-            _source: ['title', 'created', 'day', 'group','modified'],
+            _source: ['title', 'created', 'day', 'group', 'modified'],
             sort: [
                 {
                     group: {
@@ -25,7 +25,12 @@ module.exports = {
                     },
                 },
                 {
-                    modified: {
+                    day: {
+                        order: 'asc',
+                    },
+                },
+                {
+                    time: {
                         order: 'asc',
                     },
                 },
@@ -77,6 +82,7 @@ module.exports = {
             created: moment().format('YYYY-MM-DD'),
             group: moment().format('YYYY년 MM월'),
             day: moment().format('DD'),
+            time: moment().format('HH:mm:ss'),
             modified: moment().format('YYYY-MM-DD HH:mm:ss'),
         };
         try {

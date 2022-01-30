@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import BoardList from './Sections/BoardList';
-import { Button, Typography } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { boardActions } from '../../../slice/boardSlice';
 import { articleActions } from '../../../slice/articleSlice';
 import { createSelector } from '@reduxjs/toolkit';
 import './style.scss';
-const { Title } = Typography;
 
 function BoardPage() {
     const dispatch = useDispatch();
@@ -52,14 +50,19 @@ function BoardPage() {
         history.push(path);
         // dispatch(articleActions.getArticle(id));
     };
-
+    const onNewPost = () => {
+        const path = `/register?isForEdit=false`;
+        history.push(path);
+        // dispatch(articleActions.getArticle(id));
+    };
+    const onLogOut = () => {
+        // dispatch(articleActions.deleteArticle(id));
+    };
     return (
         <div style={{ width: '80%', margin: '3rem auto' }}>
-            <div>
-                <Link to="/register?isForEdit=false">
-                    <Button type="primary">New Post</Button>
-                </Link>
-            </div>
+        <button className='logoutBtn' onClick={onNewPost}>out</button>
+            <button className='newPostBtn' onClick={onLogOut}>+</button>
+
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
                 {/* <Title>게시판</Title> */}
                 <img

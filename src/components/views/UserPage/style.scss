@@ -1,0 +1,62 @@
+.joinModal {
+    background-color: #999;
+    width: 400px;
+    height: 250px;
+    padding: 30px;
+    position: fixed;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+.loginDiv {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 150px);
+    min-width: 300px;
+    max-width: 400px;
+    margin: 15px auto;
+    border-radius: 15px;
+    padding: 35px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 15px 30px;
+}
+.loginDiv input {
+    height: 30px;
+    margin: 10px;
+    border: 3px solid #79a7a5;
+    border-radius: 10px;
+    padding: 3px 10px;
+    background-color: #fff;
+}
+.loginDiv div {
+    margin: 10px;
+    text-align: center;
+}
+
+.loginDiv div button:first-child {
+    width: calc(100% - 110px);
+}
+
+.loginDiv div button {
+    width: 70px;
+    margin: 0 10px;
+    padding: 10px;
+    border: none;
+    background-color: #79a7a5;
+    color: #fff;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px 1px #979797;
+    cursor: pointer;
+}
+
+.loginDiv div button:hover {
+    box-shadow: 1px 1px 1px 1px #979797 inset;
+}
+
+.userPageDiv {
+    top: 50%;
+    position: fixed;
+    width: 100%;
+    transform: translateY(-50%);
+}
