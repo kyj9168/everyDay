@@ -60,8 +60,12 @@ function BoardPage() {
     };
     return (
         <div style={{ width: '80%', margin: '3rem auto' }}>
-        <button className='logoutBtn' onClick={onNewPost}>out</button>
-            <button className='newPostBtn' onClick={onLogOut}>+</button>
+            <button className="newPostBtn" onClick={onNewPost}>
+                +
+            </button>
+            <button className="logoutBtn" onClick={onLogOut}>
+                out
+            </button>
 
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
                 {/* <Title>게시판</Title> */}

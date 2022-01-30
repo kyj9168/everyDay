@@ -66,8 +66,9 @@
     }
 }
 .newPostBtn {
-    position: fixed;
+    position: absolute;
     right: 30px;
+    z-index: 10;
     height: 33px;
     top: 30px;
     width: 33px;
