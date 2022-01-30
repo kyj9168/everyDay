@@ -4,6 +4,7 @@ import BoardList from './Sections/BoardList';
 import { useDispatch, useSelector } from 'react-redux';
 import { boardActions } from '../../../slice/boardSlice';
 import { articleActions } from '../../../slice/articleSlice';
+import { userActions } from 'slice/userSlice';
 import { createSelector } from '@reduxjs/toolkit';
 import './style.scss';
 
@@ -56,7 +57,7 @@ function BoardPage() {
         // dispatch(articleActions.getArticle(id));
     };
     const onLogOut = () => {
-        // dispatch(articleActions.deleteArticle(id));
+        dispatch(userActions.logoutUser());
     };
     return (
         <div style={{ width: '80%', margin: '3rem auto' }}>

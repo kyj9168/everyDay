@@ -84,3 +84,24 @@
 .newPostBtn:hover {
     transform: scale(1.1);
 }
+
+.logoutBtn{
+    position: absolute;
+    left: 30px;
+    z-index: 10;
+    height: 33px;
+    top: 30px;
+    width: 33px;
+    // font-size: 25px;
+    padding: 0;
+    border: none;
+    background-color: #cfcfcf;
+    border-radius: 5px;
+    color: #fff;
+    transition: transform 0.5s;
+    cursor: pointer;
+}
+
+.logoutBtn:hover {
+    transform: scale(1.1);
+}

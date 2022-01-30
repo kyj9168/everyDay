@@ -56,6 +56,29 @@ export function* loginUserCheckAsync(action) {
     }
 }
 
+export function* logoutUserSaga(action) {
+    const data = action.payload;
+
+    const responseForCheck = yield axios.post('/logout');
+    if (responseForCheck.data.status === 'success') {
+        window.sessionStorage.setItem('status', 'logout');
+        yield put(
+            userActions.loginUserState({
+                id: '',
+                status: 'logout',
+            })
+        );
+    } else {
+        window.sessionStorage.setItem('status', 'login');
+        yield put(
+            userActions.loginUserState({
+                id: responseForCheck.data.data.id,
+                status: 'login',
+            })
+        );
+    }
+}
+
 export function* sendJoinUser(action) {
     const data = action.payload;
     const setParam = {

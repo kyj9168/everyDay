@@ -96,6 +96,25 @@ module.exports = {
             console.log(error);
         }
     },
+    logout: async (req, res, next) => {
+        try {
+            let session = req.session;
+            console.log('세션정보 : : :', req.session);
+            if (session.user == undefined) {
+                res.send({
+                    status: 'fail',
+                });
+            } else {
+                req.session.destroy(); // 세션 삭제
+                res.clearCookie('sid'); // 세션 쿠키 삭제
+                return res.send({
+                    status: 'success',
+                });
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    },
 
     getIp: async (req, res, next) => {
         const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;

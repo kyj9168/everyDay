@@ -18,6 +18,9 @@ export const userSlice = createSlice({
         joinUser: (state, { payload: user }) => {
             console.log('유저 회원가입 버튼 호출 -- joinUser');
         },
+        logoutUser: (state, { payload: user }) => {
+            console.log('유저 로그아웃 버튼 호출 -- logoutUser');
+        },
 
         loginUserState: (state, { payload: data }) => {
             console.log('유저 정보 state -- loginUserState');
