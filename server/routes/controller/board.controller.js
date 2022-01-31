@@ -91,6 +91,27 @@ module.exports = {
             throw err;
         }
     },
+
+    editBoard: async (req, res, next) => {
+        let session = req.session;
+        const userId = session.user.id;
+        try {
+            const boardId = req.body.id;
+            const title = req.body.title;
+            const content = req.body.content;
+
+            let result = await boardModel.editBoard(boardId, title, content, userId);
+            console.log('result::::', result);
+            if (result.result === 'updated') {
+                return res.send({
+                    status: 'success',
+                    data: session.user,
+                });
+            }
+        } catch (err) {
+            throw err;
+        }
+    },
     deleteBoard: async (req, res, next) => {
         let session = req.session;
         const userId = session.user.id;

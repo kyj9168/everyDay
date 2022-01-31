@@ -66,9 +66,15 @@ function UserPage(props) {
         if (!joinUser.id) {
             alert('아이디를 입력하십시오.');
             return false;
+        } else if (joinUser.id.length < 7) {
+            alert('아이디는 7자 이상으로 지어주세요.');
+            return false;
         }
         if (!joinUser.pwd || !joinUser.pwdCheck) {
             alert('비밀번호 입력하십시오.');
+            return false;
+        } else if (joinUser.pwd.length < 7 || joinUser.pwdCheck.length < 7) {
+            alert('비밀번호는 7자 이상으로 지어주세요.');
             return false;
         }
         dispatch(userActions.joinUser(joinUser));
@@ -144,6 +150,7 @@ function UserPage(props) {
                         type="text"
                         name="joinId"
                         maxLength="20"
+                        // onKeyUp={(this.value = this.value.replace(/[^a-zA-Z-_0-9]/g, ''))}
                     />
                     <label>pwd </label>
                     <input

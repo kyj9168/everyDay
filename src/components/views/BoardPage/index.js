@@ -52,7 +52,7 @@ function BoardPage() {
         // dispatch(articleActions.getArticle(id));
     };
     const onNewPost = () => {
-        const path = `/register?isForEdit=false`;
+        const path = `/register`;
         history.push(path);
         // dispatch(articleActions.getArticle(id));
     };
@@ -60,34 +60,36 @@ function BoardPage() {
         dispatch(userActions.logoutUser());
     };
     return (
-        <div style={{ width: '80%', margin: '3rem auto' }}>
-            <button className="newPostBtn" onClick={onNewPost}>
-                +
-            </button>
-            <button className="logoutBtn" onClick={onLogOut}>
-                out
-            </button>
-
-            <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                {/* <Title>게시판</Title> */}
-                <img
-                    style={{
-                        width: '150px',
-                    }}
-                    src="/images/logo.png"
-                    alt="logo"
-                />
-            </div>
-
+        <>
             {error ? (
                 <h2>에러 발생: {error}</h2>
             ) : isSuccess && board.length > 0 ? (
-                <BoardList
-                    boardList={board}
-                    // commentLength={commentLength}
-                    handleDeleteClick={onDeleteClick}
-                    handleArticleTitleClick={onArticleTitleClick}
-                />
+                <div style={{ width: '80%', margin: '3rem auto' }}>
+                    <button className="newPostBtn" onClick={onNewPost}>
+                        +
+                    </button>
+                    <button className="logoutBtn" onClick={onLogOut}>
+                        out
+                    </button>
+
+                    <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+                        {/* <Title>게시판</Title> */}
+                        <img
+                            style={{
+                                width: '150px',
+                            }}
+                            src="/images/logo.png"
+                            alt="logo"
+                        />
+                    </div>
+
+                    <BoardList
+                        boardList={board}
+                        // commentLength={commentLength}
+                        handleDeleteClick={onDeleteClick}
+                        handleArticleTitleClick={onArticleTitleClick}
+                    />
+                </div>
             ) : isSuccess && board.length <= 0 ? (
                 <p
                     style={{
@@ -101,7 +103,7 @@ function BoardPage() {
                     <img src="/images/loadingBoard.svg" alt="loading" />
                 </div>
             )}
-        </div>
+        </>
     );
 }
 

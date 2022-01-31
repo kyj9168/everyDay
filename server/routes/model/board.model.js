@@ -17,7 +17,7 @@ module.exports = {
                     },
                 },
             },
-            _source: ['title', 'day', 'group','modified'],
+            _source: ['title', 'day', 'group', 'modified'],
             sort: [
                 {
                     group: {
@@ -88,6 +88,23 @@ module.exports = {
         try {
             // addDocument: (indexName, _id, docType, payload) =
             const result = await esService.addDocument(indexName, uuidv4(), docType, payload);
+            return result;
+        } catch (err) {
+            throw err;
+        }
+    },
+    editBoard: async (boardId, title, content, userId) => {
+        payload = {
+            doc: {
+                title: title,
+                content: content,
+                modified: moment().format('YYYY-MM-DD HH:mm:ss'),
+            },
+        };
+        console.log(111, boardId, title, userId);
+        try {
+            // addDocument: (indexName, _id, docType, payload) =indexName, _id, docType, payload)
+            const result = await esService.update(indexName, boardId, docType, payload);
             return result;
         } catch (err) {
             throw err;

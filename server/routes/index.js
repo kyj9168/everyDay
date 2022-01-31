@@ -14,6 +14,7 @@ router.get('/getIp', userController.getIp);
 router.post('/boardList', boardController.boardList);
 router.post('/board', boardController.board);
 router.post('/setBoard', boardController.setBoard);
+router.post('/editBoard', boardController.editBoard);
 router.post('/deleteBoard', boardController.deleteBoard);
 
 router.get('/', (req, res, next) => {
