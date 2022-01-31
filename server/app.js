@@ -24,14 +24,21 @@ app.use(
         cookie: {
             maxAge: 1000 * 60 * 60, // 쿠키 유효기간 1시간
         },
+        rolling: true,
+        saveUninitialized: true,
     })
 );
 app.use(
     bodyParser.urlencoded({
+        limit: '200mb',
         extended: true,
     })
 );
-app.use(bodyParser.json());
+app.use(
+    bodyParser.json({
+        limit: '200mb',
+    })
+);
 
 app.use('/', express.static(path.resolve(__dirname, '../build')));
 app.use('/', express.static(path.resolve(__dirname, '../public')));

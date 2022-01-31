@@ -1,0 +1,45 @@
+/* .jodit-toolbar-button,
+.jodit-ui-separator,
+.jodit-tabs__buttons,
+.jodit-status-bar,*/
+.jodit-status-bar {
+    display: none !important;
+}
+
+/* .jodit-toolbar-button_image {
+    display: block !important;
+} */
+.jodit-workplace {
+    height: calc(100vh - 350px) !important;
+}
+
+.backBtn {
+    height: 30px;
+    width: 30px;
+    border: none;
+    background-color: rgb(207, 207, 207);
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    transition: transform 0.5s;
+}
+
+.backBtn:hover {
+    transform: scale(1.1);
+}
+.sendBoardInfoBtn {
+    position: absolute;
+    right: 15px;
+    height: 30px;
+    width: 60px;
+    border: none;
+    background-color: rgb(121, 167, 165);
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    box-shadow: 1px 1px 1px 1px #979797;
+}
+
+.sendBoardInfoBtn:hover {
+    box-shadow: 1px 1px 1px 1px #979797 inset;
+}

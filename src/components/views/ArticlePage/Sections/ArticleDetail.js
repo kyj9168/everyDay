@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Typography } from 'antd';
 import { Link } from 'react-router-dom';
+import ReactHtmlParser from 'react-html-parser';
 
 const { Title } = Typography;
 
@@ -25,9 +26,9 @@ function ArticleDetail(props) {
                     </colgroup>
                     <tbody>
                         <tr>
-                            <th>번호</th>
-                            <td>{props.id}</td>
-                            <th>조회수</th>
+                            {/* <th>번호</th>
+                            <td>{props.id}</td> */}
+                            {/* <th>조회수</th> */}
                             <td>{props.views}</td>
                         </tr>
                         <tr>
@@ -40,33 +41,12 @@ function ArticleDetail(props) {
                         </tr>
                         <tr>
                             <th>내용</th>
-                            <td colSpan="3">{props.content}</td>
+                            <td colSpan="3">{ReactHtmlParser(props.content)}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div>
-                {props.loadComments.length > 0 &&
-                    props.loadComments.map((comment) => (
-                        <div
-                            style={{
-                                width: '100%',
-                                backgroundColor: 'lightsteelblue',
-                                border: '1px dotted black',
-                            }}
-                        >
-                            <span key={comment.id}>
-                                <span>{comment.content}</span>
-                                <span style={{ float: 'right' }}>
-                                    {new Date(comment.date).toLocaleString()}&nbsp;
-                                    <span style={{ cursor: 'pointer' }} onClick={() => props.deleteComment(comment.id)}>
-                                        [X]
-                                    </span>
-                                </span>
-                            </span>
-                        </div>
-                    ))}
-            </div>
+           
             <div style={{ margin: '2rem auto' }}>{props.handleComment}</div>
             <div style={{ margin: '2rem auto' }}>
                 <Link to={`/edit/${props.id}?isForEdit=true`}>

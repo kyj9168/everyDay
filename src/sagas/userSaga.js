@@ -55,3 +55,66 @@ export function* loginUserCheckAsync(action) {
         );
     }
 }
+
+export function* logoutUserSaga(action) {
+    const data = action.payload;
+
+    const responseForCheck = yield axios.post('/logout');
+    if (responseForCheck.data.status === 'success') {
+        window.sessionStorage.setItem('status', 'logout');
+        yield put(
+            userActions.loginUserState({
+                id: '',
+                status: 'logout',
+            })
+        );
+    } else {
+        window.sessionStorage.setItem('status', 'login');
+        yield put(
+            userActions.loginUserState({
+                id: responseForCheck.data.data.id,
+                status: 'login',
+            })
+        );
+    }
+}
+
+export function* sendJoinUser(action) {
+    const data = action.payload;
+    const setParam = {
+        userId: data.id,
+        userPwd: data.pwd,
+    };
+    const responseForJoin = yield axios.post('/join', setParam);
+
+    if (responseForJoin.data.status === 'fail') {
+        alert(responseForJoin.data.message);
+    } else if (responseForJoin.data.status === 'success') {
+        alert('회원가입 완료');
+        window.sessionStorage.setItem('status', 'login');
+        console.log('responseForJoin.data', responseForJoin.data.data.id);
+        yield put(
+            userActions.loginUserState({
+                id: responseForJoin.data.data.id,
+                status: 'login',
+            })
+        );
+    }
+    // if (responseForUser.data.status === 'success') {
+    //     window.sessionStorage.setItem('status', 'login');
+    //     yield put(
+    //         userActions.loginUserState({
+    //             id: responseForUser.data.data.id,
+    //             status: 'login',
+    //         })
+    //     );
+    // } else {
+    //     window.sessionStorage.setItem('status', 'logout');
+    //     yield put(
+    //         userActions.loginUserState({
+    //             id: '',
+    //             status: 'fail',
+    //         })
+    //     );
+    // }
+}

@@ -1,46 +1,55 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
-
+import Masonry from 'react-masonry-css';
+import FadeInSection from 'utils/fadeIn';
+import moment from 'moment';
 function BoardList(props) {
+    const breakpointColumnsObj = {
+        default: 4,
+        1100: 3,
+        800: 2,
+        500: 1,
+    };
     return (
-        <div>
-            <table style={{ width: '100%' }}>
-                <colgroup>
-                    <col width="10%" />
-                    <col width="70%" />
-                    <col width="10%" />
-                    <col width="10%" />
-                </colgroup>
-                <tbody>
-                    <tr>
-                        <th>제목</th>
-                        <th></th>
-                    </tr>
-                </tbody>
-                <tbody>
-                    {props.board.map((article) => {
-                        console.log('article:::', article);
-                        return (
-                            <tr key={article.id}>
-                                {/* <td>{board.id}</td> */}
-
-                                <td onClick={() => props.handleArticleTitleClick(article.id)}>
-                                    {article.title}
-                                    {/* &nbsp;
-                                {props.commentLength[board.id] > 0 && `[${props.commentLength[board.id]}]`} */}
-                                </td>
-
-                                {/* <td>{board.content}</td> */}
-                                {/* <td>
-                                <Button onClick={() => props.handleDeleteClick(board.id)}>X</Button>
-                            </td> */}
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
-        </div>
+        <Masonry
+            className="my-masonry-grid"
+            columnClassName="my-masonry-grid_column"
+            breakpointCols={breakpointColumnsObj}
+        >
+            {props.boardList.map((value) => {
+                return (
+                    <FadeInSection key={value[0]}>
+                        <div className="group">{value[0]}</div>
+                        {value[1].map((object) => {
+                            return (
+                                <div
+                                    className="board"
+                                    key={object.id}
+                                    onClick={() => props.handleArticleTitleClick(object.id)}
+                                >
+                                    <div className="day">{object.day}</div>
+                                    <div className="title" title={object.title}>
+                                        <div
+                                            style={{
+                                                display:
+                                                    moment(object.modified).format('YYYY-MM-DD HH:mm:ss') <
+                                                    moment().add('-3', 'h').format('YYYY-MM-DD HH:mm:ss')
+                                                        ? 'none'
+                                                        : 'block',
+                                            }}
+                                        >
+                                            new
+                                        </div>
+                                        {object.title}
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </FadeInSection>
+                );
+            })}
+        </Masonry>
     );
 }
 

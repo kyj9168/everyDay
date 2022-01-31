@@ -13,7 +13,7 @@ export function* registerArticleAsync(action) {
     history.push(`/article/${response.data.id}`, response.data.id);
 }
 
-export function* getArticleAsync(action) {
+export function* getArticleSaga(action) {
     const boardId = action.payload;
 
     const responseForArticle = yield axios.post(`/board`, { boardId });
@@ -23,6 +23,8 @@ export function* getArticleAsync(action) {
     if (ArticleData.status === 'success') {
         // yield put(boardActions.getBoardSuccessAsync(boardData.data));
         yield put(articleActions.getArticleAsync(ArticleData.data));
+
+        // history.push(`/article/${boardId}`);
     }
     // yield put(articleActions.getArticleAsync(request.data));
 }
@@ -48,13 +50,14 @@ export function* updateArticleAsync(action) {
 }
 
 export function* deleteArticleAsync(action) {
-    const id = action.payload;
+    const boardId = action.payload;
 
-    yield axios.delete(`http://localhost:4000/board/${id}`);
-
+    const responseForDelete = yield axios.post(`/deleteBoard`, { boardId });
+    console.log('responseForDelete', responseForDelete);
+    // const ArticleData = responseForArticle.data;
     alert('삭제되었습니다.');
 
     history.push(`/`);
 
-    history.go(0);
+    // history.go(0);
 }

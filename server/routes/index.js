@@ -7,9 +7,14 @@ const boardController = require(approot + '/server/routes/controller/board.contr
 
 router.post('/login', userController.login);
 router.post('/userCheck', userController.userCheck);
+router.post('/join', userController.join);
+router.post('/logout', userController.logout);
 router.get('/getIp', userController.getIp);
+
 router.post('/boardList', boardController.boardList);
 router.post('/board', boardController.board);
+router.post('/setBoard', boardController.setBoard);
+router.post('/deleteBoard', boardController.deleteBoard);
 
 router.get('/', (req, res, next) => {
     if (req.path.split('/')[1] === 'static') return next();

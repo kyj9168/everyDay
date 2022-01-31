@@ -11,56 +11,116 @@ const password_crypto = (password) => {
     return crypto.createHash('sha512').update(password).digest('base64');
 };
 // catch routing handler function error
-const doAsync = (fn) => async (req, res, next) => await fn(req, res, next).catch(next);
-const login = doAsync(async (req, res, next) => {
-    userInfo = req.body;
-    let session = req.session;
-    let userId = userInfo.userId;
-    let userPwd = password_crypto(userInfo.userPwd);
-
-    try {
-        let result = await userModel.login(userId, userPwd);
-
-        let count = result.hits.total.value;
-        result = result.hits.hits;
-        // console.log('result::', result);
-        if (count == 0) {
-            return res.send({
-                result: 'fail',
-                message: '계정을 찾을 수 없습니다.',
-            });
-        } else {
-            req.session.user = {
-                id: result[0]._source.id,
-            };
-            console.log('세션정보 : : :', session);
-            return res.send({
-                status: 'success',
-                data: session.user,
-            });
-        }
-    } catch (err) {
-        throw err;
-    }
-});
-const userCheck = doAsync(async (req, res, next) => {
-    try {
+module.exports = {
+    login: async (req, res, next) => {
+        userInfo = req.body;
         let session = req.session;
-        console.log('세션정보 : : :', req.session);
-        if (session.user == undefined) {
-            res.send({
-                status: 'fail',
-            });
-        } else {
-            return res.send({
-                status: 'success',
-                data: req.session.user,
-            });
+        let userId = userInfo.userId;
+        let userPwd = password_crypto(userInfo.userPwd);
+
+        try {
+            let result = await userModel.login(userId, userPwd);
+
+            let count = result.hits.total.value;
+            result = result.hits.hits;
+            // console.log('result::', result);
+            if (count == 0) {
+                return res.send({
+                    status: 'fail',
+                    message: '계정을 찾을 수 없습니다.',
+                });
+            } else {
+                req.session.user = {
+                    id: result[0]._source.id,
+                };
+                console.log('세션정보 : : :', session);
+                return res.send({
+                    status: 'success',
+                    data: session.user,
+                });
+            }
+        } catch (err) {
+            throw err;
         }
-    } catch (error) {
-        console.log(error);
-    }
-});
+    },
+    join: async (req, res, next) => {
+        userInfo = req.body;
+        let session = req.session;
+        let userId = userInfo.userId;
+        let userPwd = password_crypto(userInfo.userPwd);
+
+        try {
+            let result = await userModel.idCheck(userId);
+            console.log(4444, result);
+            let count = result.hits.total.value;
+            let hits = result.hits.hits;
+            // // console.log('result::', result);
+            if (count == 0) {
+                let result = await userModel.joinUser(userId, userPwd);
+                console.log(12312, result);
+                if (result.result === 'created') {
+                    req.session.user = {
+                        id: userId,
+                    };
+                    console.log('세션정보 : : :', session);
+                    return res.send({
+                        status: 'success',
+                        data: session.user,
+                    });
+                }
+            } else {
+                return res.send({
+                    status: 'fail',
+                    message: '중복된 아이디 입니다.',
+                });
+            }
+        } catch (err) {
+            throw err;
+        }
+    },
+    userCheck: async (req, res, next) => {
+        try {
+            let session = req.session;
+            console.log('세션정보 : : :', req.session);
+            if (session.user == undefined) {
+                res.send({
+                    status: 'fail',
+                });
+            } else {
+                return res.send({
+                    status: 'success',
+                    data: req.session.user,
+                });
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    logout: async (req, res, next) => {
+        try {
+            let session = req.session;
+            console.log('세션정보 : : :', req.session);
+            if (session.user == undefined) {
+                res.send({
+                    status: 'fail',
+                });
+            } else {
+                req.session.destroy(); // 세션 삭제
+                res.clearCookie('sid'); // 세션 쿠키 삭제
+                return res.send({
+                    status: 'success',
+                });
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
+    getIp: async (req, res, next) => {
+        const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+        res.send(ip);
+    },
+};
 // const autocomplete = doAsync(async (req, res, next) => {
 //   const payload = req.body;
 
@@ -95,14 +155,3 @@ const userCheck = doAsync(async (req, res, next) => {
 //     });
 //   res.send(result);
 // });
-
-const getIp = doAsync(async (req, res, next) => {
-    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-    res.send(ip);
-});
-
-module.exports = {
-    login,
-    userCheck,
-    getIp,
-};
