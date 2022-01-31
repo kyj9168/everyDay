@@ -130,14 +130,15 @@ function UserPage(props) {
                     name="pwd"
                     maxLength="20"
                 />
+                <p className="userModal" style={{ textAlign: 'center', display: status === 'fail' ? '' : 'none' }}>
+                    계정을 찾지 못햇습니다. 아이디 및 비밀번호를 확인해 주세요.
+                </p>
                 <div>
                     <button onClick={sendLoginInfo}>기록하러 가기</button>
                     <button onClick={inJoinUserPage}>가입</button>
                 </div>
             </div>
-            <p className="userModal" style={{ textAlign: 'center', display: status === 'fail' ? '' : 'none' }}>
-                계정을 찾지 못햇습니다. 아이디 및 비밀번호를 확인해 주세요.
-            </p>
+
             <div className="joinModal" style={{ display: joinModalState ? 'flex' : 'none' }}>
                 <div className="joinModalDiv">
                     <p>아이디 및 비밀번호를 입력하세요. </p>
