@@ -3,12 +3,12 @@ import { createSlice } from '@reduxjs/toolkit';
 export const articleSlice = createSlice({
     name: 'article',
     initialState: {
-        id: 0,
-        title: 'loading...',
-        content: 'loading...',
-        userId: 'loading...',
-        created: 'loading...',
-        modified: 'loading...',
+        id: 'loading',
+        title: 'loading',
+        content: 'loading',
+        userId: 'loading',
+        created: 'loading',
+        modified: 'loading',
     },
     reducers: {
         registerArticle: (state, { payload: article }) => {
@@ -58,12 +58,12 @@ export const articleSlice = createSlice({
         initializationRegisterInput: (state, { payload }) => {
             return {
                 ...state,
-                id: 0,
-                title: 'loading...',
-                content: 'loading...',
-                userId: 'loading...',
-                created: 'loading...',
-                modified: 'loading...',
+                id: 'loading',
+                title: 'loading',
+                content: 'loading',
+                userId: 'loading',
+                created: 'loading',
+                modified: 'loading',
             };
         },
     },

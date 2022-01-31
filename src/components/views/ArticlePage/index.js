@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { articleActions } from '../../../slice/articleSlice';
-import ArticleDetail from './Sections/ArticleDetail';
 
 import { Link } from 'react-router-dom';
 import ReactHtmlParser from 'react-html-parser';
@@ -36,27 +35,37 @@ function ArticlePage({ match, location }) {
     };
 
     return (
-        <div className="articlePage">
-            <a href="/">
-                <button className="backBtn">←</button>
-            </a>
+        <>
+            {id == 'loading' ? (
+                <div className="loading">
+                    <img src="/images/loading.svg" alt="loading" />
+                </div>
+            ) : (
+                <div className="articlePage">
+                    <a href="/">
+                        <button className="backBtn">←</button>
+                    </a>
 
-            <div className="acticleDetail">
-                <div>{created}</div>
-                <div>{title}</div>
+                    <div className="acticleDetail">
+                        <div style={{ padding: '10px', textAlign: created == 'loading' ? 'center' : 'right' }}>
+                            {created}
+                        </div>
+                        <div style={{ padding: '10px', textAlign: 'center' }}>{title}</div>
 
-                <div>{ReactHtmlParser(content)}</div>
-            </div>
+                        <div style={{ padding: '10px', textAlign: 'center' }}>{ReactHtmlParser(content)}</div>
+                    </div>
 
-            <div className="btnDiv">
-                <a href={`/edit/${id}`}>
-                    <button className="editBtn">수정</button>
-                </a>
-                <button className="deleteBtn" onClick={onDeleteClick}>
-                    삭제
-                </button>
-            </div>
-        </div>
+                    <div className="btnDiv">
+                        <a href={`/edit/${id}`}>
+                            <button className="editBtn">수정</button>
+                        </a>
+                        <button className="deleteBtn" onClick={onDeleteClick}>
+                            삭제
+                        </button>
+                    </div>
+                </div>
+            )}
+        </>
     );
 }
 

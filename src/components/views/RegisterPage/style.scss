@@ -43,3 +43,13 @@
 .sendBoardInfoBtn:hover {
     box-shadow: 1px 1px 1px 1px #979797 inset;
 }
+
+.loading {
+    background-color: rgba(255, 255, 255, 0.5);
+    position: fixed;
+    z-index: 20;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+}

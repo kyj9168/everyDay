@@ -11,7 +11,7 @@ function RegisterPage(props) {
     const titleInput = useRef();
 
     const editor = useRef(null);
-
+    const [loading, setLoading] = useState(false);
     const sendRegister = (event) => {
         const register = {
             title: titleInput.current.value,
@@ -27,11 +27,20 @@ function RegisterPage(props) {
             return false;
         }
         // console.log('등록할 게시글:::', register);
+        setLoading(true);
         dispatch(boardActions.setBoard(register));
     };
 
     return (
         <>
+            <div
+                className="loading"
+                style={{
+                    display: loading ? 'block' : 'none',
+                }}
+            >
+                <img src="/images/loading.svg" />
+            </div>
             <div style={{ width: 'calc(100% - 30px)', margin: '1rem auto' }}>
                 <a href="/">
                     <button className="backBtn">←</button>
@@ -40,7 +49,7 @@ function RegisterPage(props) {
                 <div style={{ width: '100%', margin: '1rem auto' }}>
                     <label>제목 : </label>
                     <input
-                    placeholder='제목을 입력하세요.'
+                        placeholder="제목을 입력하세요."
                         style={{
                             width: '100%',
                             maxWidth: '400px',

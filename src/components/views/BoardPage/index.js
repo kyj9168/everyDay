@@ -97,8 +97,8 @@ function BoardPage() {
                     아직 일상을 기록 하지 않으셨네요. 위 + 버튼을 눌러 일상을 기록해 보세요.
                 </p>
             ) : (
-                <div className="loadingBoardList">
-                    <img src="/images/loadingBoardList.svg" alt="loading" />
+                <div className="loadingBoard">
+                    <img src="/images/loadingBoard.svg" alt="loading" />
                 </div>
             )}
         </div>
