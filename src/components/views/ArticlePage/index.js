@@ -67,11 +67,10 @@ function ArticlePage({ match, location }) {
                     </div>
 
                     <div className="btnDiv">
-                        <a href={`/edit/${id}`}>
-                            <button className="editBtn" onClick={onEditClick}>
-                                수정
-                            </button>
-                        </a>
+                        <button className="editBtn" onClick={onEditClick}>
+                            수정
+                        </button>
+
                         <button className="deleteBtn" onClick={onDeleteClick}>
                             삭제
                         </button>
