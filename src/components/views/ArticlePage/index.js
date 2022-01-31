@@ -15,12 +15,13 @@ function ArticlePage({ match, location }) {
         // dispatch(commentActions.getComments(match.params.articleId));
     }, []);
 
-    const { id, title, content, created, modified } = useSelector((state) => ({
+    const { id, title, content, created, modified, loading } = useSelector((state) => ({
         id: state.articleReducers.id,
         title: state.articleReducers.title,
         content: state.articleReducers.content,
         created: state.articleReducers.created,
         modified: state.articleReducers.modified,
+        loading: state.articleReducers.loading,
     }));
     // const views = useSelector((state) => state.articleReducers.views);
     // const comments = useSelector((state) => state.commentReducers.comments);
@@ -31,12 +32,13 @@ function ArticlePage({ match, location }) {
     };
     const onEditClick = () => {
         if (!window.confirm('수정하시겠습니까?')) return false;
+        dispatch(articleActions.initializationRegisterInput());
         const path = `/edit/${id}`;
         history.push(path);
     };
     return (
         <>
-            {id == 'loading' ? (
+            {loading ? (
                 <div className="loading">
                     <img src="/images/loading.svg" alt="loading" />
                 </div>

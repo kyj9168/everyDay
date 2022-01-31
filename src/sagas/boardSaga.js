@@ -24,6 +24,7 @@ export function* setBoardAsync(action) {
         const setParam = {
             title: data.title,
             content: data.content,
+            created: data.created,
         };
         const responseForBoard = yield axios.post(`/setBoard`, setParam);
 
@@ -50,6 +51,7 @@ export function* editBoardSaga(action) {
             id: data.id,
             title: data.title,
             content: data.content,
+            created: data.created,
         };
         const responseForBoard = yield axios.post(`/editBoard`, setParam);
 

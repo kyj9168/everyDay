@@ -74,14 +74,15 @@ module.exports = {
             throw err;
         }
     },
-    setBoard: async (title, content, userId) => {
+    setBoard: async (title, content, userId, created) => {
+        console.log('created:::', created);
         payload = {
             title: title,
             content: content,
             userId: userId,
-            created: moment().format('YYYY-MM-DD'),
-            group: moment().format('YYYY년 MM월'),
-            day: moment().format('DD'),
+            created: moment(created).format('YYYY-MM-DD'),
+            group: moment(created).format('YYYY년 MM월'),
+            day: moment(created).format('DD'),
             time: moment().format('HH:mm:ss'),
             modified: moment().format('YYYY-MM-DD HH:mm:ss'),
         };
@@ -93,12 +94,15 @@ module.exports = {
             throw err;
         }
     },
-    editBoard: async (boardId, title, content, userId) => {
+    editBoard: async (boardId, title, content, userId, created) => {
         payload = {
             doc: {
                 title: title,
                 content: content,
                 modified: moment().format('YYYY-MM-DD HH:mm:ss'),
+                created: moment(created).format('YYYY-MM-DD'),
+                group: moment(created).format('YYYY년 MM월'),
+                day: moment(created).format('DD'),
             },
         };
         console.log(111, boardId, title, userId);

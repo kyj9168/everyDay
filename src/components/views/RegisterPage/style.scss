@@ -54,3 +54,15 @@
     width: 100%;
     height: 100%;
 }
+.react-datepicker-wrapper {
+    position: fixed;
+    top: 20px;
+    width: 72px;
+    right: 50px;
+    .dateDiv {
+        width: 72px;
+    }
+}
+.react-datepicker-popper {
+    z-index: 50;
+}

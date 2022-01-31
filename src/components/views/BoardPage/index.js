@@ -14,6 +14,7 @@ function BoardPage() {
 
     useEffect(() => {
         dispatch(articleActions.initializationRegisterInput());
+        dispatch(boardActions.loadingBoardAsync());
         dispatch(boardActions.getBoard());
     }, [dispatch]);
 
@@ -61,48 +62,47 @@ function BoardPage() {
     };
     return (
         <>
-            {error ? (
-                <h2>에러 발생: {error}</h2>
-            ) : isSuccess && board.length > 0 ? (
-                <div style={{ width: '80%', margin: '3rem auto' }}>
-                    <button className="newPostBtn" onClick={onNewPost}>
-                        +
-                    </button>
-                    <button className="logoutBtn" onClick={onLogOut}>
-                        out
-                    </button>
+            <div style={{ width: '80%', margin: '3rem auto' }}>
+                <button className="newPostBtn" onClick={onNewPost}>
+                    +
+                </button>
+                <button className="logoutBtn" onClick={onLogOut}>
+                    out
+                </button>
 
-                    <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                        {/* <Title>게시판</Title> */}
-                        <img
-                            style={{
-                                width: '150px',
-                            }}
-                            src="/images/logo.png"
-                            alt="logo"
-                        />
-                    </div>
-
+                <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+                    {/* <Title>게시판</Title> */}
+                    <img
+                        style={{
+                            width: '150px',
+                        }}
+                        src="/images/logo.png"
+                        alt="logo"
+                    />
+                </div>
+                {error ? (
+                    <h2>에러 발생: {error}</h2>
+                ) : isSuccess && board.length > 0 ? (
                     <BoardList
                         boardList={board}
                         // commentLength={commentLength}
                         handleDeleteClick={onDeleteClick}
                         handleArticleTitleClick={onArticleTitleClick}
                     />
-                </div>
-            ) : isSuccess && board.length <= 0 ? (
-                <p
-                    style={{
-                        textAlign: 'center',
-                    }}
-                >
-                    아직 일상을 기록 하지 않으셨네요. 위 + 버튼을 눌러 일상을 기록해 보세요.
-                </p>
-            ) : (
-                <div className="loadingBoard">
-                    <img src="/images/loadingBoard.svg" alt="loading" />
-                </div>
-            )}
+                ) : isSuccess && board.length <= 0 ? (
+                    <p
+                        style={{
+                            textAlign: 'center',
+                        }}
+                    >
+                        아직 일상을 기록 하지 않으셨네요. 위 + 버튼을 눌러 일상을 기록해 보세요.
+                    </p>
+                ) : (
+                    <div className="loadingBoard">
+                        <img src="/images/loadingBoard.svg" alt="loading" />
+                    </div>
+                )}
+            </div>
         </>
     );
 }

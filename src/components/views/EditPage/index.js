@@ -4,6 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import JoditEditor from 'jodit-react';
 import { boardActions } from 'slice/boardSlice';
 import { articleActions } from 'slice/articleSlice';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+import { ko } from 'date-fns/esm/locale';
+import 'react-datepicker/dist/react-datepicker.css';
 import './style.scss';
 
 // const { TextArea } = Input;
@@ -11,7 +15,6 @@ function RegisterPage({ match }) {
     const dispatch = useDispatch();
     const titleInput = useRef();
     const editor = useRef(null);
-
     const { id, title, content, created, modified } = useSelector((state) => ({
         id: state.articleReducers.id,
         title: state.articleReducers.title,
@@ -19,18 +22,19 @@ function RegisterPage({ match }) {
         created: state.articleReducers.created,
         modified: state.articleReducers.modified,
     }));
-
-    const [loading, setLoading] = useState(false);
-
+    const [startDate, setStartDate] = useState(new Date());
     useEffect(() => {
         dispatch(articleActions.getArticle(match.params.editId));
-    }, [dispatch]);
+        setStartDate(new Date(created));
+    }, [created]);
+    const [loading, setLoading] = useState(false);
 
     const sendRegister = (event) => {
         const register = {
             id: id,
             title: titleInput.current.value,
             content: editor.current.value,
+            created: startDate,
         };
 
         if (!register.title) {
@@ -43,7 +47,9 @@ function RegisterPage({ match }) {
         }
         // console.log('등록할 게시글:::', register);
         setLoading(true);
-        dispatch(boardActions.editBoard(register)); 
+
+        dispatch(boardActions.editBoard(register));
+        dispatch(articleActions.loadingRegisterInput());
     };
 
     return (
@@ -81,7 +87,14 @@ function RegisterPage({ match }) {
                                 // value={title}
                                 defaultValue={title}
                             />
-                            <hr></hr>
+                            <DatePicker
+                                dateFormat="yyyy-MM-dd"
+                                className="dateDiv"
+                                selected={startDate}
+                                locale={ko}
+                                onChange={(date) => setStartDate(date)}
+                            />
+                            <hr />
                             <JoditEditor
                                 ref={editor}
                                 config={{

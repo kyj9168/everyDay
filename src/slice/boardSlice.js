@@ -27,6 +27,13 @@ export const boardSlice = createSlice({
                 isLoading: false,
             };
         },
+        loadingBoardAsync: (state, { payload: data }) => {
+            console.log('saga에서 put 액션 호출 -- getBoardSuccessAsync');
+            return {
+                ...state,
+                isSuccess: false,
+            };
+        },
         getBoardFailedAsync: (state, { payload: error }) => {
             console.log('saga에서 put 액션 호출 -- getBoardFailedAsync');
             return {

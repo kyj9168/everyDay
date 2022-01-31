@@ -78,8 +78,8 @@ module.exports = {
         try {
             const title = req.body.title;
             const content = req.body.content;
-
-            let result = await boardModel.setBoard(title, content, userId);
+            const created = req.body.created;
+            let result = await boardModel.setBoard(title, content, userId, created);
             console.log('result::::', result);
             if (result.result === 'created') {
                 return res.send({
@@ -99,8 +99,9 @@ module.exports = {
             const boardId = req.body.id;
             const title = req.body.title;
             const content = req.body.content;
+            const created = req.body.created;
 
-            let result = await boardModel.editBoard(boardId, title, content, userId);
+            let result = await boardModel.editBoard(boardId, title, content, userId,created);
             console.log('result::::', result);
             if (result.result === 'updated') {
                 return res.send({
