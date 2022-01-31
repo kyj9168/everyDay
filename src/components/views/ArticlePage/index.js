@@ -57,7 +57,7 @@ function ArticlePage({ match, location }) {
                                 padding: '10px',
                                 textAlign: 'center',
                                 overflowY: 'auto',
-                                height: 'calc(100vh - 300px)',
+                                maxHeight: 'calc(100vh - 300px)',
                             }}
                         >
                             {ReactHtmlParser(content)}
