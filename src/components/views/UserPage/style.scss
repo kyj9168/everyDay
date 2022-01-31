@@ -1,25 +1,94 @@
 .joinModal {
-    background-color: #999;
-    width: 400px;
-    height: 250px;
+    background-color: #bdbdbdb7;
+    width: 100%;
+    height: 100%;
     padding: 30px;
     position: fixed;
-    top: 60%;
+    display: none;
+    flex-direction: column;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 10;
+    border-radius: 10px;
+    color: #000;
+    .joinModalDiv {
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 70%;
+        min-width: 250px;
+        max-width: 400px;
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 15px 30px;
+        p {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        label {
+            margin-top: 10px;
+        }
+        input {
+            border: none;
+            height: 30px;
+            border: 3px solid #79a7a5;
+            border-radius: 10px;
+            padding: 3px 10px;
+        }
+        .closeBtn {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            height: 30px;
+            width: 30px;
+            border: none;
+            background-color: #cfcfcf;
+            border-radius: 5px;
+            color: #fff;
+            transition: transform 0.5s;
+            cursor: pointer;
+        }
+        .closeBtn:hover {
+            transform: scale(1.1);
+        }
+        .joinBtn {
+            padding: 10px;
+            width: 80%;
+            height: 40px;
+            border: none;
+            border-radius: 10px;
+            background-color: #79a7a5;
+            color: #fff;
+            margin: 30px auto 10px auto;
+            cursor: pointer;
+            box-shadow: 1px 1px 1px 1px #979797;
+        }
+
+        .joinBtn:hover {
+            box-shadow: 1px 1px 1px 1px #979797 inset;
+        }
+    }
 }
 
 .loginDiv {
     display: flex;
     flex-direction: column;
-    width: calc(100% - 150px);
-    min-width: 300px;
+    width: 70%;
+    min-width: 250px;
     max-width: 400px;
     margin: 15px auto;
     border-radius: 15px;
     padding: 35px;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 15px 30px;
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 .loginDiv input {
     height: 30px;
@@ -55,8 +124,9 @@
 }
 
 .userPageDiv {
-    top: 50%;
-    position: fixed;
-    width: 100%;
-    transform: translateY(-50%);
+    height: 100%;
+    // top: 50%;
+    // position: fixed;
+    // width: 100%;
+    // transform: translateY(-50%);
 }

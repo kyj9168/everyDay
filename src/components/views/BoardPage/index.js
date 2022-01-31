@@ -89,9 +89,17 @@ function BoardPage() {
                     handleArticleTitleClick={onArticleTitleClick}
                 />
             ) : isSuccess && board.length <= 0 ? (
-                <p> 조회할 내용이 없습니다. </p>
+                <p
+                    style={{
+                        textAlign: 'center',
+                    }}
+                >
+                    아직 일상을 기록 하지 않으셨네요. 위 + 버튼을 눌러 일상을 기록해 보세요.
+                </p>
             ) : (
-                <p> 목록을 불러오는 중입니다. </p>
+                <div className="loadingBoardList">
+                    <img src="/images/loadingBoardList.svg" alt="loading" />
+                </div>
             )}
         </div>
     );

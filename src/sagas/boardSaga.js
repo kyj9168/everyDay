@@ -30,7 +30,7 @@ export function* setBoardAsync(action) {
         const boardData = responseForBoard.data;
         console.log('등록 성공::::::::::::', boardData);
         if (boardData.status === 'success') {
-            alert('게시글이 등록되었습니다.');
+            alert('일상이 등록되었습니다.');
 
             history.push(`/`);
         }

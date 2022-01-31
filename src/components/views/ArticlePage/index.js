@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { articleActions } from '../../../slice/articleSlice';
 import ArticleDetail from './Sections/ArticleDetail';
-import { Button, Typography } from 'antd';
+
 import { Link } from 'react-router-dom';
 import ReactHtmlParser from 'react-html-parser';
+import './style.scss';
 
-const { Title } = Typography;
 function ArticlePage({ match, location }) {
     // console.log(match.params.articleId);
 
@@ -35,75 +35,26 @@ function ArticlePage({ match, location }) {
         dispatch(articleActions.deleteArticle(id));
     };
 
-    // const [CommentValue, setCommentValue] = useState('');
-
-    // const onCommentChange = (e) => {
-    //     setCommentValue(e.currentTarget.value);
-    // };
-
-    // const onCommentSubmit = () => {
-    //     if (CommentValue === '' || CommentValue === null || CommentValue === undefined) {
-    //         alert('댓글을 입력하십시오.');
-    //         return false;
-    //     }
-    //     const comment = {
-    //         id: 0,
-    //         content: CommentValue,
-    //         date: Date.now(),
-    //         articleId: id,
-    //     };
-
-    //     // dispatch(commentActions.registerComment(comment));
-    // };
-
-    // const onDeleteComment = (commentId) => {
-    //     // dispatch(commentActions.deleteComment(commentId));
-    // };
-
     return (
-        <div style={{ width: '80%', margin: '3rem auto' }}>
-            <div>
-                <div style={{ margin: '2rem auto' }}>
-                    <a href="/">
-                        <Button type="primary">목록으로 가기</Button>
-                    </a>
-                </div>
-                <div style={{ textAlign: 'center' }}>
-                    <Title>게시글</Title>
-                </div>
-                <div>
-                    <table>
-                        <colgroup>
-                            <col width="10%" />
-                            <col width="40%" />
-                            <col width="10%" />
-                            <col width="40%" />
-                        </colgroup>
-                        <tbody>
-                            <tr>
-                                <th>날짜</th>
-                                <td>{created}</td>
-                            </tr>
-                            <tr>
-                                <th>제목</th>
-                                <td colSpan="3">{title}</td>
-                            </tr>
-                            <tr>
-                                <th>내용</th>
-                                <td colSpan="3">{ReactHtmlParser(content)}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+        <div className="articlePage">
+            <a href="/">
+                <button className="backBtn">←</button>
+            </a>
 
-                <div style={{ margin: '2rem auto' }}>
-                    <Link to={`/edit/${id}?isForEdit=true`}>
-                        <Button type="primary">수정</Button>
-                    </Link>
-                </div>
-                <div style={{ margin: 'auto' }}>
-                    <Button onClick={onDeleteClick}>삭제</Button>
-                </div>
+            <div className="acticleDetail">
+                <div>{created}</div>
+                <div>{title}</div>
+
+                <div>{ReactHtmlParser(content)}</div>
+            </div>
+
+            <div className="btnDiv">
+                <a href={`/edit/${id}`}>
+                    <button className="editBtn">수정</button>
+                </a>
+                <button className="deleteBtn" onClick={onDeleteClick}>
+                    삭제
+                </button>
             </div>
         </div>
     );

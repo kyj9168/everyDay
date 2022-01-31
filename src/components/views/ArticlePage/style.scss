@@ -1,0 +1,45 @@
+.articlePage {
+    padding: 30px;
+}
+.acticleDetail {
+    border: 1px solid rgb(220, 220, 220);
+    padding: 10px;
+    margin: 20px 0;
+    div {
+        border-bottom: 1px solid rgb(220, 220, 220);
+    }
+}
+.backBtn {
+    height: 30px;
+    width: 30px;
+    border: none;
+    background-color: rgb(207, 207, 207);
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    transition: transform 0.5s;
+}
+
+.backBtn:hover {
+    transform: scale(1.1);
+}
+.btnDiv {
+    position: absolute;
+    right: 15px;
+}
+.deleteBtn,
+.editBtn {
+    margin: 10px;
+    height: 30px;
+    width: 60px;
+    border: none;
+    background-color: rgb(121, 167, 165);
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    box-shadow: 1px 1px 1px 1px #979797;
+}
+
+.deleteBtn:hover {
+    box-shadow: 1px 1px 1px 1px #979797 inset;
+}

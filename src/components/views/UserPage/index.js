@@ -55,9 +55,9 @@ function UserPage(props) {
 
     const sendJoinInfo = () => {
         const joinUser = {
-            id: joinId.current.state.value,
-            pwd: joinPwd.current.state.value,
-            pwdCheck: joinPwdCheck.current.state.value,
+            id: joinId.current.value,
+            pwd: joinPwd.current.value,
+            pwdCheck: joinPwdCheck.current.value,
         };
         if (joinUser.pwd != joinUser.pwdCheck) {
             alert('비밀번호가 일치하지 않습니다.');
@@ -72,7 +72,7 @@ function UserPage(props) {
             return false;
         }
         dispatch(userActions.joinUser(joinUser));
-        // dispatch(modalActions.joinModalStateAsync(true));
+        dispatch(modalActions.joinModalStateAsync(false));
     };
     const inJoinUserPage = () => {
         dispatch(modalActions.joinModalStateAsync(true));
@@ -90,7 +90,15 @@ function UserPage(props) {
     };
     return (
         <div className="userPageDiv">
-            <div style={{ textAlign: 'center' }}>
+            <div
+                style={{
+                    textAlign: 'center',
+                    position: 'absolute',
+                    top: '30%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                }}
+            >
                 <img
                     src="/images/logo.png"
                     alt="logo"
@@ -117,23 +125,46 @@ function UserPage(props) {
                     maxLength="20"
                 />
                 <div>
-                    <button onClick={sendLoginInfo}>LOGIN</button>
-                    <button onClick={inJoinUserPage}>JOIN</button>
+                    <button onClick={sendLoginInfo}>기록하러 가기</button>
+                    <button onClick={inJoinUserPage}>가입</button>
                 </div>
             </div>
             <p className="userModal" style={{ textAlign: 'center', display: status === 'fail' ? '' : 'none' }}>
                 계정을 찾지 못햇습니다. 아이디 및 비밀번호를 확인해 주세요.
             </p>
-            <div className="joinModal" style={{ display: joinModalState ? 'block' : 'none' }}>
-                <p>아이디 및 비밀번호를 입력하세요. </p>
-                <input type="button" value="닫기" onClick={outJoinUserPage} />
-                <label>id </label>
-                <input ref={joinId} onKeyPress={joinEnterKey} type="text" name="joinId" />
-                <label>pwd </label>
-                <input ref={joinPwd} onKeyPress={joinEnterKey} type="password" name="joinPwd" />
-                <label>pwd check</label>
-                <input ref={joinPwdCheck} onKeyPress={joinEnterKey} type="password" name="joinPwdCheck" />
-                <input type="button" value="회원가입" onClick={sendJoinInfo} />
+            <div className="joinModal" style={{ display: joinModalState ? 'flex' : 'none' }}>
+                <div className="joinModalDiv">
+                    <p>아이디 및 비밀번호를 입력하세요. </p>
+                    <input className="closeBtn" type="button" value="✕" onClick={outJoinUserPage} />
+                    <label>id </label>
+                    <input
+                        placeholder="아이디를 입력하세요."
+                        ref={joinId}
+                        onKeyPress={joinEnterKey}
+                        type="text"
+                        name="joinId"
+                        maxLength="20"
+                    />
+                    <label>pwd </label>
+                    <input
+                        placeholder="비밀번호를 입력하세요."
+                        ref={joinPwd}
+                        onKeyPress={joinEnterKey}
+                        type="password"
+                        name="joinPwd"
+                        maxLength="20"
+                    />
+                    <label>pwd check</label>
+                    <input
+                        placeholder="비밀번호를 한번 더 입력하세요."
+                        ref={joinPwdCheck}
+                        onKeyPress={joinEnterKey}
+                        type="password"
+                        name="joinPwdCheck"
+                        maxLength="20"
+                    />
+                    <input className="joinBtn" type="button" value="일상 기록하러 가기" onClick={sendJoinInfo} />
+                </div>
             </div>
             <div style={{ margin: '0 auto 0 auto', width: 'fit-content' }}>
                 {/* <Button type="primary" onClick={inEditUserPage} style={{ marginLeft: '15px' }}>

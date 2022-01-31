@@ -17,7 +17,7 @@ module.exports = {
                     },
                 },
             },
-            _source: ['title', 'day', 'group'],
+            _source: ['title', 'day', 'group','modified'],
             sort: [
                 {
                     group: {

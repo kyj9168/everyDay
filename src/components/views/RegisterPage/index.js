@@ -1,93 +1,20 @@
 import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Input } from 'antd';
+// import { Button, Input } from 'antd';
 import JoditEditor from 'jodit-react';
 import { boardActions } from '../../../slice/boardSlice';
-import './style.css';
+import './style.scss';
 
-const { TextArea } = Input;
+// const { TextArea } = Input;
 function RegisterPage(props) {
     const dispatch = useDispatch();
     const titleInput = useRef();
 
     const editor = useRef(null);
 
-    const config = {
-        readonly: false, // all options from https://xdsoft.net/jodit/doc/
-        uploader: {
-            insertImageAsBase64URI: true,
-        },
-        enter: 'P',
-        defaultMode: '1',
-        // buttons: 'image',
-        // minHeight: 300,
-    };
-    // const config = {
-    //     readonly: false,
-    //     minHeight: 500,
-
-    //     enter: "P",
-    //     defaultMode: "1",
-    //     buttons:
-    //       "source |, bold, strikethrough, underline, italic, | ul, ol, outdent, indent, | font, fontsize, brush, | image, table |,align,undo,redo,\n,selectall,cut,copy,paste,eraser,copyformat,|,hr,symbol"
-    //   };
-
-    // const { id, created, modified, title, content } = useSelector(
-    //     (state) => ({
-    //         id: state.articleReducers.id,
-    //         created: state.articleReducers.date,
-    //         modified: state.articleReducers.editDate,
-    //         title: state.articleReducers.title,
-    //         content: state.articleReducers.content,
-    //     }),
-    //     shallowEqual
-    // );
-
-    // const [IsForUpdate, setIsForUpdate] = useState(false);
-
-    // useEffect(() => {
-    //     const searchParams = new URLSearchParams(props.location.search);
-    //     if (searchParams.get('isForEdit') === 'true') {
-    //         dispatch(articleActions.fetchArticle(props.match.params.articleId));
-    //         setIsForUpdate(true);
-    //     }
-    // }, []);
-
-    // const onRegisterChange = (event) => {
-    //     const { name, value } = event.target;
-    //     dispatch(articleActions.changeRegisterInput({ name: name, value: value }));
-    // };
-
-    // const onSubmitArticle = (event) => {
-    //     event.preventDefault();
-
-    //     if (title === '' || title === null || title === undefined) {
-    //         alert('제목을 작성하십시오.');
-    //         return false;
-    //     }
-
-    //     if (content === '' || content === null || content === undefined) {
-    //         alert('내용을 작성하십시오.');
-    //         return false;
-    //     }
-
-    //     const article = {
-    //         id: id, ///
-    //         title: title,
-    //         content: content,
-    //         created: created,
-    //         modified: modified,
-    //     };
-
-    //     // if (IsForUpdate) {
-    //     //     dispatch(articleActions.updateArticle(article));
-    //     // } else {
-    //         dispatch(articleActions.registerArticle(article));
-    //     // }
-    // };
     const sendRegister = (event) => {
         const register = {
-            title: titleInput.current.state.value,
+            title: titleInput.current.value,
             content: editor.current.value,
         };
 
@@ -107,16 +34,31 @@ function RegisterPage(props) {
         <>
             <div style={{ width: 'calc(100% - 30px)', margin: '1rem auto' }}>
                 <a href="/">
-                    <Button>←</Button>
+                    <button className="backBtn">←</button>
                 </a>
                 <br />
                 <div style={{ width: '100%', margin: '1rem auto' }}>
-                    <label>Title: </label>
-                    <Input ref={titleInput} type="text" name="title" />
+                    <label>제목 : </label>
+                    <input
+                    placeholder='제목을 입력하세요.'
+                        style={{
+                            width: '100%',
+                            maxWidth: '400px',
+                        }}
+                        ref={titleInput}
+                        type="text"
+                        name="title"
+                    />
                     <hr></hr>
                     <JoditEditor
                         ref={editor}
-                        config={config}
+                        config={{
+                            readonly: false,
+                            uploader: {
+                                insertImageAsBase64URI: true,
+                            },
+                            placeholder: '오늘 하루는 어떤 일이 있으셨어요?',
+                        }}
                         tabIndex={1} // tabIndex of textarea
                         style={{ height: 'calc(100vh - 300px)' }}
                         // onBlur={(newContent) => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
@@ -127,9 +69,9 @@ function RegisterPage(props) {
 
                     {/* <TextArea ref={contextInput} rows="30" name="content" /> */}
                 </div>
-                <Button type="primary" onClick={sendRegister}>
+                <button className="sendBoardInfoBtn" onClick={sendRegister}>
                     등록
-                </Button>
+                </button>
             </div>
         </>
     );

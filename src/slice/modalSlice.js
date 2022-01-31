@@ -13,12 +13,6 @@ export const modalSlice = createSlice({
                 joinModalState: data || false,
             };
         },
-        // allModalDisable: (state, { payload: data }) => {
-        //     return {
-        //         ...state,
-        //         joinModalStatus: false,
-        //     };
-        // },
     },
 });
 
