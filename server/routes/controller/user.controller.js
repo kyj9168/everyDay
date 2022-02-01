@@ -79,6 +79,57 @@ module.exports = {
             throw err;
         }
     },
+    changePwd: async (req, res, next) => {
+        const pwdData = req.body;
+        let session = req.session;
+        let userId = session.user.id;
+        let userPwd = password_crypto(pwdData.userPwd);
+        let changePwd = password_crypto(pwdData.changePwd);
+
+        try {
+            const checkResult = await userModel.login(userId, userPwd);
+            console.log(4444, checkResult);
+            let count = checkResult.hits.total.value;
+            if (count > 0) {
+                let result = await userModel.changePwd(userId, changePwd);
+                console.log(333333, result);
+                if (result.result === 'updated') {
+                    req.session.destroy(); // 세션 삭제
+                    res.clearCookie('sid'); // 세션 쿠키 삭제
+                    return res.send({
+                        status: 'success'
+                    });
+                }
+            } else {
+                return res.send({
+                    status: 'fail',
+                });
+            }
+            // let hits = result.hits.hits;
+            // // // console.log('result::', result);
+            // if (count == 0) {
+            //     let result = await userModel.joinUser(userId, userPwd);
+            //     console.log(12312, result);
+            //     if (result.result === 'created') {
+            //         req.session.user = {
+            //             id: userId,
+            //         };
+            //         console.log('세션정보 : : :', session);
+            //         return res.send({
+            //             status: 'success',
+            //             data: session.user,
+            //         });
+            //     }
+            // } else {
+            //     return res.send({
+            //         status: 'fail',
+            //         message: '중복된 아이디 입니다.',
+            //     });
+            // }
+        } catch (err) {
+            throw err;
+        }
+    },
     userCheck: async (req, res, next) => {
         try {
             let session = req.session;

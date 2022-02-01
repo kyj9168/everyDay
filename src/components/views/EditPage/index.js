@@ -91,6 +91,7 @@ function RegisterPage({ match }) {
                                 dateFormat="yyyy-MM-dd"
                                 className="dateDiv"
                                 selected={startDate}
+                                maxDate={new Date()}
                                 locale={ko}
                                 onChange={(date) => setStartDate(date)}
                             />

@@ -94,6 +94,20 @@ module.exports = {
             throw err;
         }
     },
+    changePwd: async (userId, changePwd) => {
+        payload = {
+            doc: {
+                pwd: changePwd,
+                modified: moment().format('YYYY-MM-DD HH:mm:ss'),
+            },
+        };
+        try {
+            const result = await esService.update(indexName, userId, docType, payload);
+            return result;
+        } catch (err) {
+            throw err;
+        }
+    },
     // join: async (data) => {
     //     payload = {
     //         id: data.userId,

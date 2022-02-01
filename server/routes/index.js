@@ -10,6 +10,7 @@ router.post('/userCheck', userController.userCheck);
 router.post('/join', userController.join);
 router.post('/logout', userController.logout);
 router.post('/leaveUser', userController.leaveUser);
+router.post('/changePwd', userController.changePwd);
 router.get('/getIp', userController.getIp);
 
 router.post('/boardList', boardController.boardList);

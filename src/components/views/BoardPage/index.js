@@ -12,7 +12,10 @@ import './style.scss';
 function BoardPage() {
     const dispatch = useDispatch();
     const history = useHistory();
-    const leaveUserInput = useRef();
+    const leaveUserInput = useRef(null);
+    const originalPwdInput = useRef(null);
+    const pwdInput = useRef(null);
+    const checkPwdInput = useRef(null);
 
     const [toggleUserDiv, setToggleUserDiv] = useState(false);
     useEffect(() => {
@@ -36,22 +39,6 @@ function BoardPage() {
     const { id } = useSelector((state) => ({
         id: state.userReducers.id,
     }));
-    // const createCommentLength = createSelector(
-    //     (state) => state.boardReducers.board,
-    //     (state) => state.commentReducers.comments,
-    //     (articles, comments) => {
-    //         const commentByArticle = {};
-    //         for (var index in articles) {
-    //             if (!comments) return commentByArticle;
-
-    //             const filteredComments = comments.filter((comment) => comment.articleId === articles[index].id);
-    //             commentByArticle[articles[index].id] = filteredComments.length;
-    //         }
-    //         return commentByArticle;
-    //     }
-    // );
-
-    // const commentLength = useSelector(createCommentLength);
 
     const onDeleteClick = (id) => {
         if (!window.confirm('삭제하시겠습니까?')) return false;
@@ -83,6 +70,7 @@ function BoardPage() {
     };
     const closeLeaveUserDiv = () => {
         dispatch(modalActions.leaveUserStateAsync(false));
+        leaveUserInput.current.value = '';
     };
     const sendLeaveUser = () => {
         if (!window.confirm('탈퇴가 진행될시 모든 게시물이 삭제됩니다. 진행하시겠습니까?')) return false;
@@ -91,6 +79,52 @@ function BoardPage() {
         dispatch(modalActions.leaveUserStateAsync(false));
         leaveUserInput.current.value = '';
     };
+
+    const sendChangePwd = () => {
+        if (!window.confirm('비밀번호 변경을 진행하시겠습니까?')) return false;
+        const originalPwdInputValue = originalPwdInput.current.value;
+        const pwdInputValue = pwdInput.current.value;
+        const checkPwdInputValue = checkPwdInput.current.value;
+        if (pwdInputValue != checkPwdInputValue) {
+            alert('비밀번호가 일치하지 않습니다.');
+            return false;
+        }
+
+        if (!originalPwdInputValue || !pwdInputValue || !checkPwdInputValue) {
+            alert('비밀번호 입력하십시오.');
+            return false;
+        } else if (pwdInputValue.length < 7 || checkPwdInputValue.length < 7) {
+            alert('비밀번호는 7자 이상으로 지어주세요.');
+            return false;
+        }
+        if (originalPwdInputValue == pwdInputValue) {
+            alert('변경하려는 비밀번호가 동일합니다.');
+            return false;
+        }
+        const data = {
+            originalPwdInputValue,
+            pwdInputValue,
+            checkPwdInputValue,
+        };
+        console.log(22222222, data);
+        dispatch(userActions.changePwd(data));
+        dispatch(modalActions.changePwdStateAsync(false));
+        originalPwdInput.current.value = '';
+        pwdInput.current.value = '';
+        checkPwdInput.current.value = '';
+    };
+    const changePwdToggle = () => {
+        setToggleUserDiv(!toggleUserDiv);
+        dispatch(modalActions.changePwdStateAsync(true));
+    };
+
+    const closeChangePwdDiv = () => {
+        dispatch(modalActions.changePwdStateAsync(false));
+        originalPwdInput.current.value = '';
+        pwdInput.current.value = '';
+        checkPwdInput.current.value = '';
+    };
+
     return (
         <>
             <div style={{ width: '80%', margin: '3rem auto' }}>
@@ -112,6 +146,22 @@ function BoardPage() {
                     <input ref={leaveUserInput} type="password" />
                     <button onClick={sendLeaveUser}>탈퇴</button>
                 </div>
+                <div
+                    className="changePwdDiv"
+                    style={{
+                        display: changePwdState ? 'inline-block' : 'none',
+                    }}
+                >
+                    <label onClick={closeChangePwdDiv}>✕</label>
+                    <p className="ment">비밀번호를 변경해 주세요.</p>
+                    <p>현재 비밀번호</p>
+                    <input ref={originalPwdInput} type="password" />
+                    <p>변경 비밀번호</p>
+                    <input ref={pwdInput} type="password" />
+                    <p>변경 비밀번호 확인</p>
+                    <input ref={checkPwdInput} type="password" />
+                    <button onClick={sendChangePwd}>변경</button>
+                </div>
                 <ul
                     className="userInfoDiv"
                     style={{
@@ -122,7 +172,7 @@ function BoardPage() {
                         <b>⌜{id}님⌟</b>
                     </li>
                     <li onClick={onLogOut}>로그아웃</li>
-                    <li>비밀번호 변경</li>
+                    <li onClick={changePwdToggle}>비밀번호 변경</li>
                     <li onClick={leaveUserToggle}>탈퇴</li>
                 </ul>
                 <div style={{ textAlign: 'center', marginBottom: '2rem' }}>

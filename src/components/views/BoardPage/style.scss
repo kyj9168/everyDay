@@ -176,12 +176,64 @@
         cursor: pointer;
     }
 }
+.changePwdDiv {
+    border: 1px solid #999;
+    padding: 30px;
+    text-align: center;
+    border-radius: 10px;
+    width: 60%;
+    max-width: 400px;
+    position: fixed;
+    background-color: #fff;
+    z-index: 20;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 15px 30px;
+    label {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        cursor: pointer;
+    }
+    .ment {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    p {
+        width: 90%;
+        margin: 0 auto;
+        text-align: left;
+    }
+    input {
+        width: 90%;
+        margin-bottom: 10px;
+        border: 3px solid #79a7a5;
+        border-radius: 5px;
+    }
+    button {
+        margin-top: 20px;
+        width: 70px;
+        padding: 5px;
+        border: none;
+        background-color: #79a7a5;
+        color: #fff;
+        border-radius: 10px;
+        box-shadow: 1px 1px 1px 1px #979797;
+        cursor: pointer;
+    }
 
+    button:hover {
+        box-shadow: 1px 1px 1px 1px #979797 inset;
+    }
+}
 .leaveUserDiv {
     border: 1px solid #999;
     padding: 30px;
     text-align: center;
     border-radius: 10px;
+    width: 60%;
+    max-width: 400px;
     position: fixed;
     background-color: #fff;
     z-index: 20;
