@@ -17,9 +17,10 @@ router.post('/setBoard', boardController.setBoard);
 router.post('/editBoard', boardController.editBoard);
 router.post('/deleteBoard', boardController.deleteBoard);
 
-router.get('/', (req, res, next) => {
+router.get('*', (req, res, next) => {
     if (req.path.split('/')[1] === 'static') return next();
     res.sendFile(approot + '/build/index.html');
 });
+
 
 module.exports = router;
