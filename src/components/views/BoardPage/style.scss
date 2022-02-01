@@ -123,3 +123,94 @@
         height: 300px;
     }
 }
+.userInfoDiv {
+    background-color: rgb(255, 255, 255);
+    overflow: hidden;
+    z-index: 50;
+    position: fixed;
+    list-style: none;
+    top: 50px;
+    left: 30px;
+    width: 120px;
+    padding: 0;
+    transition: height 0.3s;
+    display: flex;
+    flex-direction: column;
+    li {
+        background-color: #fff;
+        width: calc(100% - 2px);
+        height: 21px;
+        // padding: 15px;
+        text-align: center;
+        color: #2c3134;
+        position: relative;
+        cursor: pointer;
+    }
+    li:nth-child(2):hover,
+    li:nth-child(3):hover,
+    li:nth-child(4):hover {
+        background-color: #79a7a5;
+        color: #fff;
+    }
+    li:nth-child(1) {
+        border: 1px solid #ededed;
+        border-radius: 5px 5px 0 0;
+    }
+    li:nth-child(2) {
+        border-left: 1px solid #ededed;
+        border-right: 1px solid #ededed;
+        border-bottom: 1px solid #ededed;
+    }
+    li:nth-child(3) {
+        border-left: 1px solid #ededed;
+        border-right: 1px solid #ededed;
+        border-bottom: 1px solid #ededed;
+    }
+    li:nth-child(4) {
+        border-left: 1px solid #ededed;
+        border-right: 1px solid #ededed;
+        border-bottom: 1px solid #ededed;
+        border-radius: 0 0 5px 5px;
+    }
+}
+
+.leaveUserDiv {
+    border: 1px solid #999;
+    padding: 30px;
+    text-align: center;
+    border-radius: 10px;
+    position: fixed;
+    background-color: #fff;
+    z-index: 20;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 15px 30px;
+    label {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        cursor: pointer;
+    }
+    input {
+        width: 90%;
+        margin-top: 30px;
+        border: 3px solid #79a7a5;
+        border-radius: 5px;
+    }
+    button {
+        margin-top: 20px;
+        width: 70px;
+        padding: 5px;
+        border: none;
+        background-color: #79a7a5;
+        color: #fff;
+        border-radius: 10px;
+        box-shadow: 1px 1px 1px 1px #979797;
+        cursor: pointer;
+    }
+
+    button:hover {
+        box-shadow: 1px 1px 1px 1px #979797 inset;
+    }
+}

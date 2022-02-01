@@ -145,4 +145,22 @@ module.exports = {
             throw err;
         }
     },
+    leaveSoDeleteBoard: async (userId) => {
+        payload = {
+            query: {
+                term: {
+                    userId: {
+                        value: userId,
+                    },
+                },
+            },
+        };
+        try {
+            // addDocument: (indexName, _id, docType, payload) =
+            const result = await esService.deleteByQuery(indexName, payload);
+            return result;
+        } catch (err) {
+            throw err;
+        }
+    },
 };

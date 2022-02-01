@@ -4,13 +4,26 @@ export const modalSlice = createSlice({
     name: 'modal',
     initialState: {
         joinModalState: false,
+        changePwdState: false,
+        leaveUserState: false,
     },
     reducers: {
         joinModalStateAsync: (state, { payload: data }) => {
-            console.log(1231231, data);
             return {
                 ...state,
                 joinModalState: data || false,
+            };
+        },
+        changePwdStateAsync: (state, { payload: data }) => {
+            return {
+                ...state,
+                changePwdState: data || false,
+            };
+        },
+        leaveUserStateAsync: (state, { payload: data }) => {
+            return {
+                ...state,
+                leaveUserState: data || false,
             };
         },
     },

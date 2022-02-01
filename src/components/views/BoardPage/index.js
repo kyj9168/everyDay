@@ -1,17 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import BoardList from './Sections/BoardList';
 import { useDispatch, useSelector } from 'react-redux';
-import { boardActions } from '../../../slice/boardSlice';
-import { articleActions } from '../../../slice/articleSlice';
+import { boardActions } from 'slice/boardSlice';
+import { articleActions } from 'slice/articleSlice';
 import { userActions } from 'slice/userSlice';
+import { modalActions } from 'slice/modalSlice';
 import { createSelector } from '@reduxjs/toolkit';
 import './style.scss';
 
 function BoardPage() {
     const dispatch = useDispatch();
     const history = useHistory();
+    const leaveUserInput = useRef();
 
+    const [toggleUserDiv, setToggleUserDiv] = useState(false);
     useEffect(() => {
         dispatch(articleActions.initializationRegisterInput());
         dispatch(boardActions.loadingBoardAsync());
@@ -25,6 +28,14 @@ function BoardPage() {
         error: state.boardReducers.error,
     }));
 
+    const { changePwdState, leaveUserState } = useSelector((state) => ({
+        changePwdState: state.modalReducers.changePwdState,
+        leaveUserState: state.modalReducers.leaveUserState,
+    }));
+
+    const { id } = useSelector((state) => ({
+        id: state.userReducers.id,
+    }));
     // const createCommentLength = createSelector(
     //     (state) => state.boardReducers.board,
     //     (state) => state.commentReducers.comments,
@@ -60,16 +71,56 @@ function BoardPage() {
     const onLogOut = () => {
         dispatch(userActions.logoutUser());
     };
+    const toggleUserInfo = () => {
+        // dispatch(userActions.logoutUser());
+        setToggleUserDiv(!toggleUserDiv);
+    };
+    const leaveUserToggle = () => {
+        setToggleUserDiv(!toggleUserDiv);
+        dispatch(modalActions.leaveUserStateAsync(true));
+    };
+    const closeLeaveUserDiv = () => {
+        dispatch(modalActions.leaveUserStateAsync(false));
+    };
+    const sendLeaveUser = () => {
+        if (!window.confirm('탈퇴가 진행될시 모든 게시물이 삭제됩니다. 진행하시겠습니까?')) return false;
+        const password = leaveUserInput.current.value;
+        dispatch(userActions.leaveUser(password));
+        dispatch(modalActions.leaveUserStateAsync(false));
+        leaveUserInput.current.value = '';
+    };
     return (
         <>
             <div style={{ width: '80%', margin: '3rem auto' }}>
                 <button className="newPostBtn" onClick={onNewPost}>
                     +
                 </button>
-                <button className="logoutBtn" onClick={onLogOut}>
-                    out
+                <button className="logoutBtn" onClick={toggleUserInfo}>
+                    🧑🏻‍💻
                 </button>
+                <div
+                    className="leaveUserDiv"
+                    style={{
+                        display: leaveUserState ? 'inline-block' : 'none',
+                    }}
+                >
+                    <label onClick={closeLeaveUserDiv}>✕</label>
+                    <p>탈퇴하시려면 비밀번호를 입력해 주세요.</p>
 
+                    <input ref={leaveUserInput} type="password" />
+                    <button onClick={sendLeaveUser}>탈퇴</button>
+                </div>
+                <ul
+                    className="userInfoDiv"
+                    style={{
+                        height: toggleUserDiv ? '89px' : '0px',
+                    }}
+                >
+                    <li>{id}님</li>
+                    <li onClick={onLogOut}>로그아웃</li>
+                    <li>비밀번호 변경</li>
+                    <li onClick={leaveUserToggle}>탈퇴</li>
+                </ul>
                 <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
                     {/* <Title>게시판</Title> */}
                     <img

@@ -4,6 +4,7 @@ import axios from 'axios';
 import { userActions } from '../slice/userSlice';
 import { v4 as uuidv4 } from 'uuid';
 import moment from 'moment';
+import history from '../utils/history';
 
 export function* loginUserAsync(action) {
     const data = action.payload;
@@ -38,6 +39,7 @@ export function* loginUserCheckAsync(action) {
 
     const responseForCheck = yield axios.post('/userCheck');
     if (responseForCheck.data.status === 'success') {
+        console.log(111111111111, responseForCheck.data);
         window.sessionStorage.setItem('status', 'login');
         yield put(
             userActions.loginUserState({
@@ -79,6 +81,27 @@ export function* logoutUserSaga(action) {
     }
 }
 
+export function* leaveUserSaga(action) {
+    const data = action.payload;
+    const setParam = {
+        userPwd: data,
+    };
+    console.log('유저 탈퇴', setParam);
+    const responseForLeave = yield axios.post('/leaveUser', setParam);
+    if (responseForLeave.data.status === 'success') {
+        window.sessionStorage.setItem('status', 'logout');
+        yield put(
+            userActions.loginUserState({
+                id: '',
+                status: 'logout',
+            })
+        );
+        alert('회원 탈퇴가 완료되었습니다.');
+        history.push(`/`);
+    } else {
+        alert('비밀번호가 달라 회원 탈퇴가 진행되지 않았습니다. 다시 한번 진행해 주세요.');
+    }
+}
 export function* sendJoinUser(action) {
     const data = action.payload;
     const setParam = {

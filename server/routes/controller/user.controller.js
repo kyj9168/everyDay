@@ -5,6 +5,7 @@
 
 const approot = require('app-root-path');
 const userModel = require(`${approot}/server/routes/model/user.model`);
+const boardModel = require(`${approot}/server/routes/model/board.model`);
 const crypto = require('crypto');
 
 const password_crypto = (password) => {
@@ -115,7 +116,32 @@ module.exports = {
             console.log(error);
         }
     },
-
+    leaveUser: async (req, res, next) => {
+        userInfo = req.body;
+        let session = req.session;
+        let userId = session.user.id;
+        let userPwd = password_crypto(userInfo.userPwd);
+        console.log(userId, userPwd);
+        try {
+            let result = await userModel.leaveUser(userId, userPwd);
+            console.log(55555, result);
+            let count = result.deleted;
+            if (count == 1) {
+                await boardModel.leaveSoDeleteBoard(userId);
+                req.session.destroy(); // 세션 삭제
+                res.clearCookie('sid'); // 세션 쿠키 삭제
+                return res.send({
+                    status: 'success',
+                });
+            } else {
+                return res.send({
+                    status: 'fail',
+                });
+            }
+        } catch (err) {
+            throw err;
+        }
+    },
     getIp: async (req, res, next) => {
         const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
         res.send(ip);

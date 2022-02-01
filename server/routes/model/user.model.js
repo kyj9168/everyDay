@@ -63,7 +63,37 @@ module.exports = {
             throw err;
         }
     },
-
+    leaveUser: async (userId, userPwd) => {
+        payload = {
+            query: {
+                bool: {
+                    must: [
+                        {
+                            term: {
+                                id: {
+                                    value: userId,
+                                },
+                            },
+                        },
+                        {
+                            term: {
+                                pwd: {
+                                    value: userPwd,
+                                },
+                            },
+                        },
+                    ],
+                },
+            },
+        };
+        try {
+            // addDocument: (indexName, _id, docType, payload) =
+            const result = await esService.deleteByQuery(indexName, payload);
+            return result;
+        } catch (err) {
+            throw err;
+        }
+    },
     // join: async (data) => {
     //     payload = {
     //         id: data.userId,

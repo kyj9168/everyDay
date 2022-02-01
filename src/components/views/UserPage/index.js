@@ -143,7 +143,7 @@ function UserPage(props) {
                 <div className="joinModalDiv">
                     <p>아이디 및 비밀번호를 입력하세요. </p>
                     <input className="closeBtn" type="button" value="✕" onClick={outJoinUserPage} />
-                    <label>id </label>
+                    <label>아이디 </label>
                     <input
                         placeholder="아이디를 입력하세요."
                         ref={joinId}
@@ -153,7 +153,7 @@ function UserPage(props) {
                         maxLength="20"
                         // onKeyUp={(this.value = this.value.replace(/[^a-zA-Z-_0-9]/g, ''))}
                     />
-                    <label>pwd </label>
+                    <label>비밀번호 </label>
                     <input
                         placeholder="비밀번호를 입력하세요."
                         ref={joinPwd}
@@ -162,7 +162,7 @@ function UserPage(props) {
                         name="joinPwd"
                         maxLength="20"
                     />
-                    <label>pwd check</label>
+                    <label>비밀번호 확인</label>
                     <input
                         placeholder="비밀번호를 한번 더 입력하세요."
                         ref={joinPwdCheck}
