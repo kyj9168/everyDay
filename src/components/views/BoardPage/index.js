@@ -69,6 +69,8 @@ function BoardPage() {
         // dispatch(articleActions.getArticle(id));
     };
     const onLogOut = () => {
+        if (!window.confirm('로그아웃 하시겠습니까?')) return false;
+
         dispatch(userActions.logoutUser());
     };
     const toggleUserInfo = () => {
@@ -116,7 +118,9 @@ function BoardPage() {
                         height: toggleUserDiv ? '89px' : '0px',
                     }}
                 >
-                    <li>{id}님</li>
+                    <li>
+                        <b>⌜{id}님⌟</b>
+                    </li>
                     <li onClick={onLogOut}>로그아웃</li>
                     <li>비밀번호 변경</li>
                     <li onClick={leaveUserToggle}>탈퇴</li>

@@ -144,7 +144,6 @@
         text-align: center;
         color: #2c3134;
         position: relative;
-        cursor: pointer;
     }
     li:nth-child(2):hover,
     li:nth-child(3):hover,
@@ -155,22 +154,26 @@
     li:nth-child(1) {
         border: 1px solid #ededed;
         border-radius: 5px 5px 0 0;
+        cursor: default;
     }
     li:nth-child(2) {
         border-left: 1px solid #ededed;
         border-right: 1px solid #ededed;
         border-bottom: 1px solid #ededed;
+        cursor: pointer;
     }
     li:nth-child(3) {
         border-left: 1px solid #ededed;
         border-right: 1px solid #ededed;
         border-bottom: 1px solid #ededed;
+        cursor: pointer;
     }
     li:nth-child(4) {
         border-left: 1px solid #ededed;
         border-right: 1px solid #ededed;
         border-bottom: 1px solid #ededed;
         border-radius: 0 0 5px 5px;
+        cursor: pointer;
     }
 }
 
