@@ -106,7 +106,6 @@ function BoardPage() {
             pwdInputValue,
             checkPwdInputValue,
         };
-        console.log(22222222, data);
         dispatch(userActions.changePwd(data));
         dispatch(modalActions.changePwdStateAsync(false));
         originalPwdInput.current.value = '';
@@ -134,13 +133,18 @@ function BoardPage() {
                     backgroundColor: darkModeState ? '#333' : '#fff',
                     width: '100%',
                     height: '100%',
-                    // overflowY: 'auto',
                     margin: '0 auto',
                     padding: '3rem 0',
                     minHeight: 'calc(100vh - 6rem)',
                 }}
             >
-                <button className="newPostBtn" onClick={onNewPost}>
+                <button
+                    style={{
+                        color: darkModeState ? '#444' : '#fff',
+                    }}
+                    className="newPostBtn"
+                    onClick={onNewPost}
+                >
                     +
                 </button>
                 <button className="logoutBtn" onClick={toggleUserInfo}>
@@ -149,30 +153,80 @@ function BoardPage() {
                 <div
                     className="leaveUserDiv"
                     style={{
+                        backgroundColor: darkModeState ? '#444' : '#fff',
+                        color: darkModeState ? '#fff' : '#000',
                         display: leaveUserState ? 'inline-block' : 'none',
                     }}
                 >
                     <label onClick={closeLeaveUserDiv}>✕</label>
                     <p>탈퇴하시려면 비밀번호를 입력해 주세요.</p>
 
-                    <input ref={leaveUserInput} type="password" />
-                    <button onClick={sendLeaveUser}>탈퇴</button>
+                    <input
+                        style={{
+                            backgroundColor: darkModeState ? '#333' : '#fff',
+                            color: darkModeState ? '#fff' : '#000',
+                        }}
+                        placeholder="현재 비밀번호를 입력하세요."
+                        ref={leaveUserInput}
+                        type="password"
+                    />
+                    <button
+                        style={{
+                            color: darkModeState ? '#444' : '#fff',
+                        }}
+                        onClick={sendLeaveUser}
+                    >
+                        탈퇴
+                    </button>
                 </div>
                 <div
                     className="changePwdDiv"
                     style={{
+                        backgroundColor: darkModeState ? '#444' : '#fff',
+                        color: darkModeState ? '#fff' : '#000',
                         display: changePwdState ? 'inline-block' : 'none',
                     }}
                 >
                     <label onClick={closeChangePwdDiv}>✕</label>
                     <p className="ment">비밀번호를 변경해 주세요.</p>
                     <p>현재 비밀번호</p>
-                    <input ref={originalPwdInput} type="password" />
+                    <input
+                        ref={originalPwdInput}
+                        type="password"
+                        placeholder="현재 비밀번호를 입력하세요."
+                        style={{
+                            backgroundColor: darkModeState ? '#333' : '#fff',
+                            color: darkModeState ? '#fff' : '#000',
+                        }}
+                    />
                     <p>변경 비밀번호</p>
-                    <input ref={pwdInput} type="password" />
+                    <input
+                        style={{
+                            backgroundColor: darkModeState ? '#333' : '#fff',
+                            color: darkModeState ? '#fff' : '#000',
+                        }}
+                        ref={pwdInput}
+                        type="password"
+                        placeholder="변경할 비밀번호를 입력하세요."
+                    />
                     <p>변경 비밀번호 확인</p>
-                    <input ref={checkPwdInput} type="password" />
-                    <button onClick={sendChangePwd}>변경</button>
+                    <input
+                        placeholder="변경할 비밀번호를 한번 더 입력하세요."
+                        style={{
+                            backgroundColor: darkModeState ? '#333' : '#fff',
+                            color: darkModeState ? '#fff' : '#000',
+                        }}
+                        ref={checkPwdInput}
+                        type="password"
+                    />
+                    <button
+                        style={{
+                            color: darkModeState ? '#444' : '#fff',
+                        }}
+                        onClick={sendChangePwd}
+                    >
+                        변경
+                    </button>
                 </div>
                 <ul
                     className="userInfoDiv"
@@ -193,7 +247,7 @@ function BoardPage() {
                         style={{
                             width: '150px',
                         }}
-                        src="/images/logo.png"
+                        src={darkModeState ? '/images/logo_dark.png' : '/images/logo.png'}
                         alt="logo"
                     />
                 </div>
@@ -215,7 +269,12 @@ function BoardPage() {
                         아직 일상을 기록 하지 않으셨네요. 위 + 버튼을 눌러 일상을 기록해 보세요.
                     </p>
                 ) : (
-                    <div className="loadingBoard">
+                    <div
+                        className="loadingBoard"
+                        style={{
+                            backgroundColor: darkModeState ? '#333' : '#fff',
+                        }}
+                    >
                         <img src="/images/loadingBoard.svg" alt="loading" />
                     </div>
                 )}
