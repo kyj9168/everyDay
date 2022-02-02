@@ -205,15 +205,15 @@ function UserPage(props) {
                     }}
                 >
                     <p>아이디 및 비밀번호를 입력하세요. </p>
-                    <input
+                    <button
                         style={{
                             color: darkModeState ? '#444' : '#fff',
                         }}
                         className="closeBtn"
-                        type="text"
-                        value="✕"
                         onClick={outJoinUserPage}
-                    />
+                    >
+                        ✕
+                    </button>
                     <label>아이디 </label>
                     <input
                         placeholder="아이디를 입력하세요."
