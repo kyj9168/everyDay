@@ -118,7 +118,8 @@ function RegisterPage(props) {
                                 alert('이미지는 3장까지만 등록 가능합니다. 기준을 맞춰주세요. 😓');
 
                                 setSendPossibile(false);
-                            } else {
+                            } else if (!sendPossibile) {
+                                console.log("asdf")
                                 setSendPossibile(true);
                             }
                         }}
