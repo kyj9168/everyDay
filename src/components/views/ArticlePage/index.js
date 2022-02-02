@@ -54,16 +54,7 @@ function ArticlePage({ match, location }) {
                         </div>
                         <div style={{ padding: '10px', textAlign: 'center' }}>{title}</div>
 
-                        <div
-                            style={{
-                                padding: '10px',
-                                textAlign: 'center',
-                                overflowY: 'auto',
-                                maxHeight: 'calc(100vh - 300px)',
-                            }}
-                        >
-                            {ReactHtmlParser(content)}
-                        </div>
+                        <div className="contentDiv">{ReactHtmlParser(content)}</div>
                     </div>
 
                     <div className="btnDiv">

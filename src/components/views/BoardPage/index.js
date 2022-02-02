@@ -124,10 +124,22 @@ function BoardPage() {
         pwdInput.current.value = '';
         checkPwdInput.current.value = '';
     };
-
+    const { darkModeState } = useSelector((state) => ({
+        darkModeState: state.activeReducers.darkModeState,
+    }));
     return (
         <>
-            <div style={{ width: '80%', margin: '3rem auto' }}>
+            <div
+                style={{
+                    backgroundColor: darkModeState ? '#333' : '#fff',
+                    width: '100%',
+                    height: '100%',
+                    // overflowY: 'auto',
+                    margin: '0 auto',
+                    padding: '3rem 0',
+                    minHeight: 'calc(100vh - 6rem)',
+                }}
+            >
                 <button className="newPostBtn" onClick={onNewPost}>
                     +
                 </button>

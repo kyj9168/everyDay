@@ -86,9 +86,9 @@
     padding: 35px;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 15px 30px;
     position: absolute;
-    top: 70%;
+    bottom: calc(30% - 30px);
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 50%);
 }
 .loginDiv input {
     height: 30px;
@@ -125,8 +125,24 @@
 
 .userPageDiv {
     height: 100%;
+    width: 100%;
+    position: absolute;
     // top: 50%;
     // position: fixed;
     // width: 100%;
     // transform: translateY(-50%);
+}
+.darkMode {
+    position: fixed;
+    left: 50%;
+    top: calc(50% + 10px);
+    transform: translate(-50%, -50%);
+
+    div,
+    path,
+    g,
+    defs {
+        font-family: none;
+        font-size: 1px;
+    }
 }

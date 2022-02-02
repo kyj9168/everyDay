@@ -76,3 +76,24 @@
         transform: translate(-50%, -50%);
     }
 }
+.contentDiv {
+    padding: 10px;
+    overflow-y: auto;
+    max-height: calc(100vh - 300px);
+    table {
+        border: none;
+        border-collapse: collapse;
+        empty-cells: show;
+        margin-bottom: 1em;
+        margin-top: 1em;
+        max-width: 100%;
+        td {
+            border: 1px solid #bfbfbf;
+            min-width: 2em;
+            padding: 0.4em;
+            user-select: text;
+
+            vertical-align: middle;
+        }
+    }
+}
