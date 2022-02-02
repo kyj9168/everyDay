@@ -102,7 +102,6 @@ function RegisterPage({ match }) {
                         </a>
                         <br />
                         <div style={{ width: '100%', margin: '1rem auto' }}>
-                            <label>제목 : </label>
                             <input
                                 placeholder="제목을 입력하세요."
                                 style={{
@@ -111,8 +110,8 @@ function RegisterPage({ match }) {
                                     border: '1px solid #ddd',
                                     borderRadius: '5px',
                                     padding: '5px',
-                                    width: 'calc(100% - 20px)',
-                                    maxWidth: '400px',
+                                    width: 'calc(100% - 12px)',
+                                    maxWidth: '500px',
                                 }}
                                 ref={titleInput}
                                 type="text"
