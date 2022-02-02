@@ -63,7 +63,51 @@ module.exports = {
             throw err;
         }
     },
-
+    leaveUser: async (userId, userPwd) => {
+        payload = {
+            query: {
+                bool: {
+                    must: [
+                        {
+                            term: {
+                                id: {
+                                    value: userId,
+                                },
+                            },
+                        },
+                        {
+                            term: {
+                                pwd: {
+                                    value: userPwd,
+                                },
+                            },
+                        },
+                    ],
+                },
+            },
+        };
+        try {
+            // addDocument: (indexName, _id, docType, payload) =
+            const result = await esService.deleteByQuery(indexName, payload);
+            return result;
+        } catch (err) {
+            throw err;
+        }
+    },
+    changePwd: async (userId, changePwd) => {
+        payload = {
+            doc: {
+                pwd: changePwd,
+                modified: moment().format('YYYY-MM-DD HH:mm:ss'),
+            },
+        };
+        try {
+            const result = await esService.update(indexName, userId, docType, payload);
+            return result;
+        } catch (err) {
+            throw err;
+        }
+    },
     // join: async (data) => {
     //     payload = {
     //         id: data.userId,

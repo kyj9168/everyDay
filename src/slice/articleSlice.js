@@ -1,14 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
+import moment from 'moment';
 
 export const articleSlice = createSlice({
     name: 'article',
     initialState: {
-        id: 0,
-        title: 'loading...',
-        content: 'loading...',
-        userId: 'loading...',
-        created: 'loading...',
-        modified: 'loading...',
+        id: 'loading',
+        title: 'loading',
+        content: 'loading',
+        userId: 'loading',
+        created: moment().format('YYYY-MM-DD'),
+        modified: 'loading',
+        loading: true,
     },
     reducers: {
         registerArticle: (state, { payload: article }) => {
@@ -26,6 +28,7 @@ export const articleSlice = createSlice({
                 content: article.content,
                 created: article.created,
                 modified: article.modified,
+                loading: false,
             };
         },
         fetchArticle: (state, { payload: id }) => {
@@ -58,12 +61,19 @@ export const articleSlice = createSlice({
         initializationRegisterInput: (state, { payload }) => {
             return {
                 ...state,
-                id: 0,
-                title: 'loading...',
-                content: 'loading...',
-                userId: 'loading...',
-                created: 'loading...',
-                modified: 'loading...',
+                id: 'loading',
+                title: 'loading',
+                content: 'loading',
+                userId: 'loading',
+                created: moment().format('YYYY-MM-DD'),
+                modified: 'loading',
+                loading: true,
+            };
+        },
+        loadingRegisterInput: (state, { payload }) => {
+            return {
+                ...state,
+                loading: true,
             };
         },
     },

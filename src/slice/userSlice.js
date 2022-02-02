@@ -21,7 +21,12 @@ export const userSlice = createSlice({
         logoutUser: (state, { payload: user }) => {
             console.log('유저 로그아웃 버튼 호출 -- logoutUser');
         },
-
+        leaveUser: (state, { payload: user }) => {
+            console.log('유저 탈퇴 버튼 호출 -- leaveUser');
+        },
+        changePwd: (state, { payload: user }) => {
+            console.log('유저 비밀번호 변경 버튼 호출 -- changePwd');
+        },
         loginUserState: (state, { payload: data }) => {
             console.log('유저 정보 state -- loginUserState');
             return {

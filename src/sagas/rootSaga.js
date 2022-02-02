@@ -10,9 +10,9 @@ import {
     //   updateArticleAsync,
     deleteArticleAsync,
 } from './articleSaga';
-import { getBoardAsync, setBoardAsync } from './boardSaga';
+import { getBoardAsync, setBoardAsync, editBoardSaga } from './boardSaga';
 
-import { loginUserAsync, loginUserCheckAsync, sendJoinUser, logoutUserSaga } from './userSaga';
+import { loginUserAsync, loginUserCheckAsync, sendJoinUser, logoutUserSaga, leaveUserSaga,changePwdSaga } from './userSaga';
 
 const {
     //   registerArticle,
@@ -22,20 +22,23 @@ const {
     //   updateArticle,
     deleteArticle,
 } = articleActions;
-const { getBoard, setBoard } = boardActions;
-const { loginUser, loginUserCheck, joinUser, logoutUser } = userActions;
+const { getBoard, setBoard, editBoard } = boardActions;
+const { loginUser, loginUserCheck, joinUser, logoutUser, leaveUser,changePwd } = userActions;
 
 // const { registerComment, getComments, deleteComment } = commentActions;
 
 export default function* rootWatcher() {
     // yield takeLatest(registerUser.type, registerUserAsync);
     // yield takeLatest(registerArticle.type, registerArticleAsync);
+    yield takeLatest(changePwd.type, changePwdSaga);
     yield takeLatest(logoutUser.type, logoutUserSaga);
+    yield takeLatest(leaveUser.type, leaveUserSaga);
     yield takeLatest(loginUser.type, loginUserAsync);
     yield takeLatest(joinUser.type, sendJoinUser);
     yield takeEvery(loginUserCheck.type, loginUserCheckAsync);
     yield takeLatest(getBoard.type, getBoardAsync);
     yield takeLatest(setBoard.type, setBoardAsync);
+    yield takeLatest(editBoard.type, editBoardSaga);
     yield takeLatest(getArticle.type, getArticleSaga);
     // yield takeEvery(fetchArticle.type, fetchArticleAsync);
     // yield takeLatest(updateArticle.type, updateArticleAsync);

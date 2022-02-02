@@ -1,9 +1,11 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 // import { Button, Input } from 'antd';
 import { userActions } from 'slice/userSlice';
 import { modalActions } from 'slice/modalSlice';
+import { activeActions } from 'slice/activeSlice';
 import { Link, useHistory } from 'react-router-dom';
+import DarkModeToggle from 'react-dark-mode-toggle';
 import './style.scss';
 function UserPage(props) {
     const dispatch = useDispatch();
@@ -66,9 +68,15 @@ function UserPage(props) {
         if (!joinUser.id) {
             alert('아이디를 입력하십시오.');
             return false;
+        } else if (joinUser.id.length < 7) {
+            alert('아이디는 7자 이상으로 지어주세요.');
+            return false;
         }
         if (!joinUser.pwd || !joinUser.pwdCheck) {
             alert('비밀번호 입력하십시오.');
+            return false;
+        } else if (joinUser.pwd.length < 7 || joinUser.pwdCheck.length < 7) {
+            alert('비밀번호는 7자 이상으로 지어주세요.');
             return false;
         }
         dispatch(userActions.joinUser(joinUser));
@@ -88,8 +96,21 @@ function UserPage(props) {
         // const path = `/LeaveUser`;
         // history.push(path);
     };
+
+    const { darkModeState } = useSelector((state) => ({
+        darkModeState: state.activeReducers.darkModeState,
+    }));
+
+    const toggleDarkMode = () => {
+        dispatch(activeActions.darkModeStateAsync());
+    };
     return (
-        <div className="userPageDiv">
+        <div
+            className="userPageDiv"
+            style={{
+                backgroundColor: darkModeState ? '#333' : '#fff',
+            }}
+        >
             <div
                 style={{
                     textAlign: 'center',
@@ -100,13 +121,25 @@ function UserPage(props) {
                 }}
             >
                 <img
-                    src="/images/logo.png"
+                    src={darkModeState ? '/images/logo_dark.png' : '/images/logo.png'}
                     alt="logo"
-                    style={{ textAlign: 'center', marginBottom: '5vmin', width: '300px' }}
+                    style={{ textAlign: 'center', marginBottom: '5vmin', width: '40vh' }}
                 />
             </div>
+            <DarkModeToggle
+                className="darkMode"
+                speed={2}
+                onChange={toggleDarkMode}
+                checked={darkModeState}
+                size={60}
+            />
 
-            <div className="loginDiv">
+            <div
+                className="loginDiv"
+                style={{
+                    backgroundColor: darkModeState ? '#444' : '#fff',
+                }}
+            >
                 <input
                     maxLength="20"
                     placeholder="아이디를 입력하세요."
@@ -114,6 +147,10 @@ function UserPage(props) {
                     onKeyPress={enterKey}
                     type="text"
                     name="id"
+                    style={{
+                        color: darkModeState ? '#fff' : '#000',
+                        backgroundColor: darkModeState ? '#444' : '#fff',
+                    }}
                 />
 
                 <input
@@ -123,20 +160,59 @@ function UserPage(props) {
                     type="password"
                     name="pwd"
                     maxLength="20"
+                    style={{
+                        color: darkModeState ? '#fff' : '#000',
+                        backgroundColor: darkModeState ? '#444' : '#fff',
+                    }}
                 />
+                <p
+                    className="userModal"
+                    style={{ textAlign: 'center', color: 'red', display: status === 'fail' ? '' : 'none' }}
+                >
+                    계정을 찾지 못햇습니다. 아이디 및 비밀번호를 확인해 주세요.
+                </p>
                 <div>
-                    <button onClick={sendLoginInfo}>기록하러 가기</button>
-                    <button onClick={inJoinUserPage}>가입</button>
+                    <button
+                        onClick={sendLoginInfo}
+                        style={{
+                            color: darkModeState ? '#444' : '#fff',
+                        }}
+                    >
+                        기록하러 가기
+                    </button>
+                    <button
+                        onClick={inJoinUserPage}
+                        style={{
+                            color: darkModeState ? '#444' : '#fff',
+                        }}
+                    >
+                        가입
+                    </button>
                 </div>
             </div>
-            <p className="userModal" style={{ textAlign: 'center', display: status === 'fail' ? '' : 'none' }}>
-                계정을 찾지 못햇습니다. 아이디 및 비밀번호를 확인해 주세요.
-            </p>
-            <div className="joinModal" style={{ display: joinModalState ? 'flex' : 'none' }}>
-                <div className="joinModalDiv">
+
+            <div
+                className="joinModal"
+                style={{ backgroundColor: darkModeState ? '#767676b7' : '#bdbdbdb7', display: joinModalState ? 'flex' : 'none' }}
+            >
+                <div
+                    className="joinModalDiv"
+                    style={{
+                        backgroundColor: darkModeState ? '#444' : '#fff',
+                        color: darkModeState ? '#FFF' : '#000',
+                    }}
+                >
                     <p>아이디 및 비밀번호를 입력하세요. </p>
-                    <input className="closeBtn" type="button" value="✕" onClick={outJoinUserPage} />
-                    <label>id </label>
+                    <input
+                        style={{
+                            color: darkModeState ? '#444' : '#fff',
+                        }}
+                        className="closeBtn"
+                        type="button"
+                        value="✕"
+                        onClick={outJoinUserPage}
+                    />
+                    <label>아이디 </label>
                     <input
                         placeholder="아이디를 입력하세요."
                         ref={joinId}
@@ -144,8 +220,13 @@ function UserPage(props) {
                         type="text"
                         name="joinId"
                         maxLength="20"
+                        style={{
+                            color: darkModeState ? '#fff' : '#000',
+                            backgroundColor: darkModeState ? '#444' : '#fff',
+                        }}
+                        // onKeyUp={(this.value = this.value.replace(/[^a-zA-Z-_0-9]/g, ''))}
                     />
-                    <label>pwd </label>
+                    <label>비밀번호 </label>
                     <input
                         placeholder="비밀번호를 입력하세요."
                         ref={joinPwd}
@@ -153,8 +234,12 @@ function UserPage(props) {
                         type="password"
                         name="joinPwd"
                         maxLength="20"
+                        style={{
+                            color: darkModeState ? '#fff' : '#000',
+                            backgroundColor: darkModeState ? '#444' : '#fff',
+                        }}
                     />
-                    <label>pwd check</label>
+                    <label>비밀번호 확인</label>
                     <input
                         placeholder="비밀번호를 한번 더 입력하세요."
                         ref={joinPwdCheck}
@@ -162,8 +247,20 @@ function UserPage(props) {
                         type="password"
                         name="joinPwdCheck"
                         maxLength="20"
+                        style={{
+                            color: darkModeState ? '#fff' : '#000',
+                            backgroundColor: darkModeState ? '#444' : '#fff',
+                        }}
                     />
-                    <input className="joinBtn" type="button" value="일상 기록하러 가기" onClick={sendJoinInfo} />
+                    <input
+                        style={{
+                            color: darkModeState ? '#444' : '#fff',
+                        }}
+                        className="joinBtn"
+                        type="button"
+                        value="일상 기록하러 가기"
+                        onClick={sendJoinInfo}
+                    />
                 </div>
             </div>
             <div style={{ margin: '0 auto 0 auto', width: 'fit-content' }}>

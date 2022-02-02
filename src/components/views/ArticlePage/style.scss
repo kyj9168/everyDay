@@ -10,6 +10,7 @@
     }
 }
 .backBtn {
+    padding: 5px;
     height: 30px;
     width: 30px;
     border: none;
@@ -42,4 +43,57 @@
 
 .deleteBtn:hover {
     box-shadow: 1px 1px 1px 1px #979797 inset;
+}
+
+.loadingBoard {
+    // background-color: #bdbdbd85;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 20;
+    width: 100%;
+    height: 100%;
+    img {
+        top: 50%;
+        left: 50%;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        width: 300px;
+        height: 300px;
+    }
+}
+.loading {
+    background-color: #ffffff80;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+.contentDiv {
+    padding: 10px;
+    overflow-y: auto;
+    max-height: calc(100vh - 300px);
+    table {
+        border: none;
+        border-collapse: collapse;
+        empty-cells: show;
+        margin-bottom: 1em;
+        margin-top: 1em;
+        max-width: 100%;
+        td {
+            border: 1px solid #bfbfbf;
+            min-width: 2em;
+            padding: 0.4em;
+            user-select: text;
+
+            vertical-align: middle;
+        }
+    }
 }
