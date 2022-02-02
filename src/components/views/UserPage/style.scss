@@ -134,9 +134,8 @@
 }
 .darkMode {
     position: fixed;
-    left: 50%;
-    top: calc(50% + 10px);
-    transform: translate(-50%, -50%);
+    right: 10px;
+    top: 10px;
 
     div,
     path,
