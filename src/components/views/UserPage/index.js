@@ -88,14 +88,6 @@ function UserPage(props) {
     const outJoinUserPage = () => {
         dispatch(modalActions.joinModalStateAsync(false));
     };
-    const inEditUserPage = () => {
-        // const path = `/editUser`;
-        // history.push(path);
-    };
-    const inLeaveUserPage = () => {
-        // const path = `/LeaveUser`;
-        // history.push(path);
-    };
 
     const { darkModeState } = useSelector((state) => ({
         darkModeState: state.activeReducers.darkModeState,
@@ -144,6 +136,13 @@ function UserPage(props) {
                     maxLength="20"
                     placeholder="아이디를 입력하세요."
                     ref={idInput}
+                    onKeyUp={(event) => {
+                        const regExp = /[^0-9a-zA-Z]/g;
+                        const ele = event.target;
+                        if (regExp.test(ele.value)) {
+                            ele.value = ele.value.replace(regExp, '');
+                        }
+                    }}
                     onKeyPress={enterKey}
                     type="text"
                     name="id"
@@ -194,7 +193,7 @@ function UserPage(props) {
             <div
                 className="joinModal"
                 style={{
-                    backgroundColor: darkModeState ? '#767676b7' : '#bdbdbdb7',
+                    backgroundColor: darkModeState ? '#00000080' : '#ffffff80',
                     display: joinModalState ? 'flex' : 'none',
                 }}
             >
@@ -219,6 +218,13 @@ function UserPage(props) {
                     <input
                         placeholder="아이디를 입력하세요."
                         ref={joinId}
+                        onKeyUp={(event) => {
+                            const regExp = /[^0-9a-zA-Z]/g;
+                            const ele = event.target;
+                            if (regExp.test(ele.value)) {
+                                ele.value = ele.value.replace(regExp, '');
+                            }
+                        }}
                         onKeyPress={joinEnterKey}
                         type="text"
                         name="joinId"

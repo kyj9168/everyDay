@@ -23,6 +23,7 @@ function RegisterPage({ match }) {
         modified: state.articleReducers.modified,
     }));
     const [startDate, setStartDate] = useState(new Date());
+    const [sendPossibile, setSendPossibile] = useState(true);
     useEffect(() => {
         dispatch(articleActions.getArticle(match.params.editId));
         setStartDate(new Date(created));
@@ -43,6 +44,10 @@ function RegisterPage({ match }) {
         }
         if (!register.content) {
             alert('내용을 입력하십시오.');
+            return false;
+        }
+        if (!sendPossibile) {
+            alert('이미지는 3장까지만 등록 가능합니다. 기준을 맞춰주세요. 😓');
             return false;
         }
         // console.log('등록할 게시글:::', register);
@@ -136,6 +141,16 @@ function RegisterPage({ match }) {
                                 tabIndex={1} // tabIndex of textarea
                                 style={{ height: 'calc(100vh - 300px)' }}
                                 value={content}
+                                onChange={(newContent) => {
+                                    const imageCount = newContent.match(/data:image/g);
+                                    if (imageCount?.length > 3) {
+                                        alert('이미지는 3장까지만 등록 가능합니다. 기준을 맞춰주세요. 😓');
+        
+                                        setSendPossibile(false);
+                                    } else {
+                                        setSendPossibile(true);
+                                    }
+                                }}
                             />
 
                             {/* <TextArea ref={contextInput} rows="30" name="content" /> */}

@@ -13,6 +13,7 @@ function RegisterPage(props) {
     const dispatch = useDispatch();
     const titleInput = useRef();
     const [startDate, setStartDate] = useState(new Date());
+    const [sendPossibile, setSendPossibile] = useState(true);
 
     const editor = useRef(null);
     const [loading, setLoading] = useState(false);
@@ -31,6 +32,10 @@ function RegisterPage(props) {
             alert('내용을 입력하십시오.');
             return false;
         }
+        if (!sendPossibile) {
+            alert('이미지는 3장까지만 등록 가능합니다. 기준을 맞춰주세요. 😓');
+            return false;
+        }
         // console.log('등록할 게시글:::', register);
         setLoading(true);
         dispatch(boardActions.setBoard(register));
@@ -38,6 +43,7 @@ function RegisterPage(props) {
     const { darkModeState } = useSelector((state) => ({
         darkModeState: state.activeReducers.darkModeState,
     }));
+
     return (
         <>
             <div
@@ -106,6 +112,18 @@ function RegisterPage(props) {
                         }}
                         tabIndex={1} // tabIndex of textarea
                         style={{ height: 'calc(100vh - 300px)' }}
+                        onChange={(newContent) => {
+                            const imageCount = newContent.match(/data:image/g);
+                            if (imageCount?.length > 3) {
+                                alert('이미지는 3장까지만 등록 가능합니다. 기준을 맞춰주세요. 😓');
+
+                                setSendPossibile(false);
+                            } else {
+                                setSendPossibile(true);
+                            }
+                        }}
+                        // value={content}
+                        // onBlur={newContent => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
                     />
 
                     {/* <TextArea ref={contextInput} rows="30" name="content" /> */}
