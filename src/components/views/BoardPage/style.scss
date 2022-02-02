@@ -33,6 +33,7 @@
     padding: 3px 7px;
     border-bottom: 1px solid #ddd;
     cursor: pointer;
+    transition: all 0.2s;
     &:last-child {
         border-bottom: none;
         border-radius: 0 0 15px 15px;
@@ -150,6 +151,7 @@
         text-align: center;
         color: #2c3134;
         position: relative;
+        transition: all 0.2s;
     }
     li:nth-child(2):hover,
     li:nth-child(3):hover,

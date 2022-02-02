@@ -115,7 +115,10 @@ function UserPage(props) {
                 <img
                     src={darkModeState ? '/images/logo_dark.png' : '/images/logo.png'}
                     alt="logo"
-                    style={{ textAlign: 'center', marginBottom: '5vmin', width: '40vh' }}
+                    className="mainLogo"
+                    style={{
+                        animationName: darkModeState ? 'updown1' : 'updown2',
+                    }}
                 />
             </div>
             <DarkModeToggle
