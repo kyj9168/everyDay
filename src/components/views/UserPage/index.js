@@ -193,7 +193,10 @@ function UserPage(props) {
 
             <div
                 className="joinModal"
-                style={{ backgroundColor: darkModeState ? '#767676b7' : '#bdbdbdb7', display: joinModalState ? 'flex' : 'none' }}
+                style={{
+                    backgroundColor: darkModeState ? '#767676b7' : '#bdbdbdb7',
+                    display: joinModalState ? 'flex' : 'none',
+                }}
             >
                 <div
                     className="joinModalDiv"
@@ -208,7 +211,7 @@ function UserPage(props) {
                             color: darkModeState ? '#444' : '#fff',
                         }}
                         className="closeBtn"
-                        type="button"
+                        type="text"
                         value="✕"
                         onClick={outJoinUserPage}
                     />
@@ -252,15 +255,15 @@ function UserPage(props) {
                             backgroundColor: darkModeState ? '#444' : '#fff',
                         }}
                     />
-                    <input
+                    <button
                         style={{
                             color: darkModeState ? '#444' : '#fff',
                         }}
                         className="joinBtn"
-                        type="button"
-                        value="일상 기록하러 가기"
                         onClick={sendJoinInfo}
-                    />
+                    >
+                        일상 기록하러 가기
+                    </button>
                 </div>
             </div>
             <div style={{ margin: '0 auto 0 auto', width: 'fit-content' }}>
