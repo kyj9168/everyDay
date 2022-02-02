@@ -234,12 +234,41 @@ function BoardPage() {
                         height: toggleUserDiv ? '89px' : '0px',
                     }}
                 >
-                    <li>
+                    <li
+                        style={{
+                            backgroundColor: darkModeState ? '#555' : '#f0f0f0',
+                            color: darkModeState ? '#fff' : '#000',
+                        }}
+                    >
                         <b>⌜{id}님⌟</b>
                     </li>
-                    <li onClick={onLogOut}>로그아웃</li>
-                    <li onClick={changePwdToggle}>비밀번호 변경</li>
-                    <li onClick={leaveUserToggle}>탈퇴</li>
+                    <li
+                        style={{
+                            backgroundColor: darkModeState ? '#555' : '#f0f0f0',
+                            color: darkModeState ? '#fff' : '#000',
+                        }}
+                        onClick={onLogOut}
+                    >
+                        로그아웃
+                    </li>
+                    <li
+                        style={{
+                            backgroundColor: darkModeState ? '#555' : '#f0f0f0',
+                            color: darkModeState ? '#fff' : '#000',
+                        }}
+                        onClick={changePwdToggle}
+                    >
+                        비밀번호 변경
+                    </li>
+                    <li
+                        style={{
+                            backgroundColor: darkModeState ? '#555' : '#f0f0f0',
+                            color: darkModeState ? '#fff' : '#000',
+                        }}
+                        onClick={leaveUserToggle}
+                    >
+                        탈퇴
+                    </li>
                 </ul>
                 <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
                     {/* <Title>게시판</Title> */}

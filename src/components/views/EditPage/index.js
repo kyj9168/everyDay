@@ -51,11 +51,18 @@ function RegisterPage({ match }) {
         dispatch(boardActions.editBoard(register));
         dispatch(articleActions.loadingRegisterInput());
     };
-
+    const { darkModeState } = useSelector((state) => ({
+        darkModeState: state.activeReducers.darkModeState,
+    }));
     return (
         <>
             {content == 'loading' ? (
-                <div className="loading">
+                <div
+                    className="loading"
+                    style={{
+                        backgroundColor: darkModeState ? '#333' : '#fff',
+                    }}
+                >
                     <img src="/images/loading.svg" alt="loading" />
                 </div>
             ) : (
@@ -63,14 +70,30 @@ function RegisterPage({ match }) {
                     <div
                         className="loading"
                         style={{
+                            backgroundColor: darkModeState ? '#00000080' : '#ffffff80',
                             display: loading ? 'block' : 'none',
                         }}
                     >
                         <img src="/images/loading.svg" />
                     </div>
-                    <div style={{ width: 'calc(100% - 30px)', margin: '1rem auto' }}>
+                    <div
+                        style={{
+                            backgroundColor: darkModeState ? '#333' : '#fff',
+                            width: 'calc(100% - 2rem)',
+                            padding: '1rem',
+                            height: 'calc(100vh - 2rem)',
+                            color: darkModeState ? '#fff' : '#000',
+                        }}
+                    >
                         <a href="/">
-                            <button className="backBtn">←</button>
+                            <button
+                                className="backBtn"
+                                style={{
+                                    color: darkModeState ? '#444' : '#fff',
+                                }}
+                            >
+                                ←
+                            </button>
                         </a>
                         <br />
                         <div style={{ width: '100%', margin: '1rem auto' }}>
@@ -78,6 +101,11 @@ function RegisterPage({ match }) {
                             <input
                                 placeholder="제목을 입력하세요."
                                 style={{
+                                    backgroundColor: darkModeState ? '#333' : '#fff',
+                                    color: darkModeState ? '#fff' : '#000',
+                                    border: '1px solid #ddd',
+                                    borderRadius: '5px',
+                                    padding: '5px',
                                     width: 'calc(100% - 20px)',
                                     maxWidth: '400px',
                                 }}
@@ -112,7 +140,13 @@ function RegisterPage({ match }) {
 
                             {/* <TextArea ref={contextInput} rows="30" name="content" /> */}
                         </div>
-                        <button className="sendBoardInfoBtn" onClick={sendRegister}>
+                        <button
+                            style={{
+                                color: darkModeState ? '#444' : '#fff',
+                            }}
+                            className="sendBoardInfoBtn"
+                            onClick={sendRegister}
+                        >
                             수정
                         </button>
                     </div>

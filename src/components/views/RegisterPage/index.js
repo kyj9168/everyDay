@@ -35,19 +35,38 @@ function RegisterPage(props) {
         setLoading(true);
         dispatch(boardActions.setBoard(register));
     };
+    const { darkModeState } = useSelector((state) => ({
+        darkModeState: state.activeReducers.darkModeState,
+    }));
     return (
         <>
             <div
                 className="loading"
                 style={{
+                    backgroundColor: darkModeState ? '#00000080' : '#ffffff80',
                     display: loading ? 'block' : 'none',
                 }}
             >
                 <img src="/images/loading.svg" />
             </div>
-            <div style={{ width: 'calc(100% - 30px)', margin: '1rem auto' }}>
+            <div
+                style={{
+                    backgroundColor: darkModeState ? '#333' : '#fff',
+                    width: 'calc(100% - 2rem)',
+                    padding: '1rem',
+                    height: 'calc(100vh - 2rem)',
+                    color: darkModeState ? '#fff' : '#000',
+                }}
+            >
                 <a href="/">
-                    <button className="backBtn">←</button>
+                    <button
+                        style={{
+                            color: darkModeState ? '#444' : '#fff',
+                        }}
+                        className="backBtn"
+                    >
+                        ←
+                    </button>
                 </a>
                 <br />
                 <div style={{ width: '100%', margin: '1rem auto' }}>
@@ -55,6 +74,11 @@ function RegisterPage(props) {
                     <input
                         placeholder="제목을 입력하세요."
                         style={{
+                            backgroundColor: darkModeState ? '#333' : '#fff',
+                            color: darkModeState ? '#fff' : '#000',
+                            border: '1px solid #ddd',
+                            borderRadius: '5px',
+                            padding: '5px',
                             width: 'calc(100% - 20px)',
                             maxWidth: '400px',
                         }}
@@ -70,7 +94,7 @@ function RegisterPage(props) {
                         locale={ko}
                         onChange={(date) => setStartDate(date)}
                     />
-                    <hr/>
+                    <hr />
                     <JoditEditor
                         ref={editor}
                         config={{
@@ -86,7 +110,13 @@ function RegisterPage(props) {
 
                     {/* <TextArea ref={contextInput} rows="30" name="content" /> */}
                 </div>
-                <button className="sendBoardInfoBtn" onClick={sendRegister}>
+                <button
+                    style={{
+                        color: darkModeState ? '#444' : '#fff',
+                    }}
+                    className="sendBoardInfoBtn"
+                    onClick={sendRegister}
+                >
                     등록
                 </button>
             </div>

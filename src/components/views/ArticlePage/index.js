@@ -36,16 +36,40 @@ function ArticlePage({ match, location }) {
         const path = `/edit/${id}`;
         history.push(path);
     };
+    const { darkModeState } = useSelector((state) => ({
+        darkModeState: state.activeReducers.darkModeState,
+    }));
     return (
         <>
             {loading ? (
-                <div className="loading">
+                <div
+                    className="loading"
+                    style={{
+                        backgroundColor: darkModeState ? '#333' : '#fff',
+                    }}
+                >
                     <img src="/images/loading.svg" alt="loading" />
                 </div>
             ) : (
-                <div className="articlePage">
+                <div
+                    className="articlePage"
+                    style={{
+                        backgroundColor: darkModeState ? '#333' : '#fff',
+                        width: 'calc(100% - 2rem)',
+                        padding: '1rem',
+                        height: 'calc(100vh - 2rem)',
+                        color: darkModeState ? '#fff' : '#000',
+                    }}
+                >
                     <a href="/">
-                        <button className="backBtn">←</button>
+                        <button
+                            className="backBtn"
+                            style={{
+                                color: darkModeState ? '#444' : '#fff',
+                            }}
+                        >
+                            ←
+                        </button>
                     </a>
 
                     <div className="acticleDetail">
@@ -58,11 +82,23 @@ function ArticlePage({ match, location }) {
                     </div>
 
                     <div className="btnDiv">
-                        <button className="editBtn" onClick={onEditClick}>
+                        <button
+                            style={{
+                                color: darkModeState ? '#444' : '#fff',
+                            }}
+                            className="editBtn"
+                            onClick={onEditClick}
+                        >
                             수정
                         </button>
 
-                        <button className="deleteBtn" onClick={onDeleteClick}>
+                        <button
+                            style={{
+                                color: darkModeState ? '#444' : '#fff',
+                            }}
+                            className="deleteBtn"
+                            onClick={onDeleteClick}
+                        >
                             삭제
                         </button>
                     </div>

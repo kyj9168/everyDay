@@ -140,7 +140,7 @@
     display: flex;
     flex-direction: column;
     li {
-        background-color: #cfcfcf;
+        // background-color: #cfcfcf;
         width: calc(100% - 2px);
         height: 21px;
         // padding: 15px;
@@ -151,30 +151,30 @@
     li:nth-child(2):hover,
     li:nth-child(3):hover,
     li:nth-child(4):hover {
-        background-color: #79a7a5;
-        color: #fff;
+        background-color: #79a7a5 !important;
+        color: #fff !important;
     }
     li:nth-child(1) {
-        border: 1px solid #ededed;
+        border: 1px solid #b9b9b9;
         border-radius: 5px 5px 0 0;
         cursor: default;
     }
     li:nth-child(2) {
-        border-left: 1px solid #ededed;
-        border-right: 1px solid #ededed;
-        border-bottom: 1px solid #ededed;
+        border-left: 1px solid #b9b9b9;
+        border-right: 1px solid #b9b9b9;
+        border-bottom: 1px solid #b9b9b9;
         cursor: pointer;
     }
     li:nth-child(3) {
-        border-left: 1px solid #ededed;
-        border-right: 1px solid #ededed;
-        border-bottom: 1px solid #ededed;
+        border-left: 1px solid #b9b9b9;
+        border-right: 1px solid #b9b9b9;
+        border-bottom: 1px solid #b9b9b9;
         cursor: pointer;
     }
     li:nth-child(4) {
-        border-left: 1px solid #ededed;
-        border-right: 1px solid #ededed;
-        border-bottom: 1px solid #ededed;
+        border-left: 1px solid #b9b9b9;
+        border-right: 1px solid #b9b9b9;
+        border-bottom: 1px solid #b9b9b9;
         border-radius: 0 0 5px 5px;
         cursor: pointer;
     }
