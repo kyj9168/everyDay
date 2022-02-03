@@ -46,7 +46,6 @@
 }
 
 .loading {
-    background-color: rgba(255, 255, 255, 0.5);
     position: fixed;
     z-index: 20;
     top: 0px;
@@ -55,10 +54,10 @@
     height: 100%;
 }
 .react-datepicker-wrapper {
-    position: fixed;
+    position: absolute;
     top: 20px;
     width: 72px;
-    right: 50px;
+    right: 24px;
     .dateDiv {
         width: 72px;
     }

@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const activeSlice = createSlice({
     name: 'modal',
     initialState: {
-        darkModeState: false,
+        darkModeState: (window.matchMedia && window.matchMedia('(prefers-color-scheme: Dark)').matches) || false,
     },
     reducers: {
         darkModeStateAsync: (state, { payload: data }) => {

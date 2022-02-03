@@ -22,13 +22,15 @@
         left: 50%;
         transform: translate(-50%, -50%);
         width: 70%;
-        min-width: 250px;
+        // min-width: 250px;
         max-width: 400px;
         border-radius: 10px;
         box-shadow: rgba(0, 0, 0, 0.2) 0px 15px 30px;
         p {
             font-size: 20px;
+            margin-top: 30px;
             margin-bottom: 20px;
+            text-align: center;
         }
         label {
             margin-top: 10px;
@@ -46,6 +48,8 @@
             top: 10px;
             height: 30px;
             width: 30px;
+            padding: 0;
+            text-align: center;
             border: none;
             background-color: #cfcfcf;
             border-radius: 5px;
@@ -76,10 +80,11 @@
 }
 
 .loginDiv {
+    transition: all 0.4s;
     display: flex;
     flex-direction: column;
     width: 70%;
-    min-width: 250px;
+    // min-width: 250px;
     max-width: 400px;
     margin: 15px auto;
     border-radius: 15px;
@@ -91,6 +96,7 @@
     transform: translate(-50%, 50%);
 }
 .loginDiv input {
+    transition: all 0.3s;
     height: 30px;
     margin: 10px;
     border: 3px solid #79a7a5;
@@ -104,18 +110,19 @@
 }
 
 .loginDiv div button:first-child {
-    width: calc(100% - 110px);
+    width: calc(100% - 80px);
+    margin-right: 10px;
 }
 
 .loginDiv div button {
     width: 70px;
-    margin: 0 10px;
     padding: 10px;
     border: none;
     background-color: #79a7a5;
     color: #fff;
     border-radius: 10px;
     box-shadow: 1px 1px 1px 1px #979797;
+    transition: all 0.3s;
     cursor: pointer;
 }
 
@@ -127,16 +134,22 @@
     height: 100%;
     width: 100%;
     position: absolute;
-    // top: 50%;
-    // position: fixed;
-    // width: 100%;
-    // transform: translateY(-50%);
+    transition: all 0.5s;
+    .mainLogo {
+        text-align: center;
+        margin-bottom: 5vmin;
+        width: 40vh;
+        position: relative;
+        animation-duration: 1s;
+        animation-timing-function: ease-out;
+        // animation-delay: 0.5s;
+        // animation-iteration-count: 3;
+    }
 }
 .darkMode {
     position: fixed;
-    left: 50%;
-    top: calc(50% + 10px);
-    transform: translate(-50%, -50%);
+    right: 10px;
+    top: 10px;
 
     div,
     path,
@@ -144,5 +157,40 @@
     defs {
         font-family: none;
         font-size: 1px;
+    }
+}
+@keyframes updown1 {
+    0% {
+        bottom: 0;
+    }
+    25% {
+        bottom: 20px;
+    }
+    50% {
+        bottom: 0;
+    }
+    75% {
+        bottom: 10px;
+    }
+    100% {
+        bottom: 0;
+    }
+}
+
+@keyframes updown2 {
+    0% {
+        bottom: 0;
+    }
+    25% {
+        bottom: 20px;
+    }
+    50% {
+        bottom: 0;
+    }
+    75% {
+        bottom: 10px;
+    }
+    100% {
+        bottom: 0;
     }
 }

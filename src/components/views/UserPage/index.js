@@ -88,14 +88,6 @@ function UserPage(props) {
     const outJoinUserPage = () => {
         dispatch(modalActions.joinModalStateAsync(false));
     };
-    const inEditUserPage = () => {
-        // const path = `/editUser`;
-        // history.push(path);
-    };
-    const inLeaveUserPage = () => {
-        // const path = `/LeaveUser`;
-        // history.push(path);
-    };
 
     const { darkModeState } = useSelector((state) => ({
         darkModeState: state.activeReducers.darkModeState,
@@ -123,7 +115,10 @@ function UserPage(props) {
                 <img
                     src={darkModeState ? '/images/logo_dark.png' : '/images/logo.png'}
                     alt="logo"
-                    style={{ textAlign: 'center', marginBottom: '5vmin', width: '40vh' }}
+                    className="mainLogo"
+                    style={{
+                        animationName: darkModeState ? 'updown1' : 'updown2',
+                    }}
                 />
             </div>
             <DarkModeToggle
@@ -144,6 +139,13 @@ function UserPage(props) {
                     maxLength="20"
                     placeholder="아이디를 입력하세요."
                     ref={idInput}
+                    onKeyUp={(event) => {
+                        const regExp = /[^0-9a-zA-Z]/g;
+                        const ele = event.target;
+                        if (regExp.test(ele.value)) {
+                            ele.value = ele.value.replace(regExp, '');
+                        }
+                    }}
                     onKeyPress={enterKey}
                     type="text"
                     name="id"
@@ -193,7 +195,10 @@ function UserPage(props) {
 
             <div
                 className="joinModal"
-                style={{ backgroundColor: darkModeState ? '#767676b7' : '#bdbdbdb7', display: joinModalState ? 'flex' : 'none' }}
+                style={{
+                    backgroundColor: darkModeState ? '#00000080' : '#ffffff80',
+                    display: joinModalState ? 'flex' : 'none',
+                }}
             >
                 <div
                     className="joinModalDiv"
@@ -203,19 +208,26 @@ function UserPage(props) {
                     }}
                 >
                     <p>아이디 및 비밀번호를 입력하세요. </p>
-                    <input
+                    <button
                         style={{
                             color: darkModeState ? '#444' : '#fff',
                         }}
                         className="closeBtn"
-                        type="button"
-                        value="✕"
                         onClick={outJoinUserPage}
-                    />
+                    >
+                        ✕
+                    </button>
                     <label>아이디 </label>
                     <input
                         placeholder="아이디를 입력하세요."
                         ref={joinId}
+                        onKeyUp={(event) => {
+                            const regExp = /[^0-9a-zA-Z]/g;
+                            const ele = event.target;
+                            if (regExp.test(ele.value)) {
+                                ele.value = ele.value.replace(regExp, '');
+                            }
+                        }}
                         onKeyPress={joinEnterKey}
                         type="text"
                         name="joinId"
@@ -252,15 +264,15 @@ function UserPage(props) {
                             backgroundColor: darkModeState ? '#444' : '#fff',
                         }}
                     />
-                    <input
+                    <button
                         style={{
                             color: darkModeState ? '#444' : '#fff',
                         }}
                         className="joinBtn"
-                        type="button"
-                        value="일상 기록하러 가기"
                         onClick={sendJoinInfo}
-                    />
+                    >
+                        일상 기록하러 가기
+                    </button>
                 </div>
             </div>
             <div style={{ margin: '0 auto 0 auto', width: 'fit-content' }}>
